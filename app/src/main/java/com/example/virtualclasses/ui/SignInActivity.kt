@@ -1,7 +1,8 @@
-package com.example.virtualclasses
+package com.example.virtualclasses.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.example.virtualclasses.R
 
 class SignInActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "595227259749",
+    "firebase_url": "https://virtual-classes-51ebe.firebaseio.com",
+    "project_id": "virtual-classes-51ebe",
+    "storage_bucket": "virtual-classes-51ebe.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:595227259749:android:ead4bb111c5c5697d0a78c",
+        "android_client_info": {
+          "package_name": "com.example.virtualclasses"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "595227259749-dg9808124ghkmmejjv0gkv9ge8grjf99.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB-Av_Q-dEuDtTyGY2cfKa1xf9GbL01KsY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "595227259749-dg9808124ghkmmejjv0gkv9ge8grjf99.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -4,33 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".SignInActivity">
+    tools:context=".ui.SignInActivity">
 
 
-    <EditText
-        android:id="@+id/editTextTextEmail"
-        android:layout_width="240dp"
-        android:layout_height="wrap_content"
-        android:inputType="textEmailAddress"
-        android:hint="email"
-        android:layout_centerInParent="true"/>
-
-    <EditText
-        android:id="@+id/editTextPassword"
-        android:layout_width="240dp"
-        android:layout_height="wrap_content"
-        android:inputType="textPassword"
-        android:hint="password"
-        android:layout_below="@id/editTextTextEmail"
-        android:layout_centerInParent="true" />
-
-    <Button
-        android:id="@+id/buttonSignIn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="sign in"
-        android:fontFamily="@font/actor"
-        android:layout_below="@id/editTextPassword"
-        android:layout_centerHorizontal="true"/>
-
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/nav_host_fragment"
+        android:name="androidx.navigation.fragment.NavHostFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:defaultNavHost="true"
+        app:navGraph="@navigation/nav_graph" />
 </RelativeLayout>
