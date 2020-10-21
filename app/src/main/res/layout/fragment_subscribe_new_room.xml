@@ -3,21 +3,26 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.fragments.SubscribedRoomFragment"
+    tools:context=".ui.fragments.SubscribeNewRoomFragment"
     android:orientation="vertical"
     android:gravity="center"
-    android:paddingStart="16dp"
-    android:paddingEnd="16dp">
+    android:paddingEnd="16dp"
+    android:paddingStart="16dp">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/subscribedRoom"
+    <EditText
+        android:id="@+id/roomOwnerId"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1"/>
+        android:hint="ownerId" />
+    <EditText
+        android:id="@+id/roomId"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="roomId"/>
+
     <Button
-        android:id="@+id/subscribeRoomButton"
+        android:id="@+id/subscribeNewRoomButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="subscribe to room"/>
-
+        android:text="subscribe"/>
 </LinearLayout>

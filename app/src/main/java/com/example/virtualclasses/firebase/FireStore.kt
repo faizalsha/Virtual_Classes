@@ -2,6 +2,7 @@ package com.example.virtualclasses.firebase
 
 import com.example.virtualclasses.local.Constants
 import com.example.virtualclasses.model.Room
+import com.example.virtualclasses.model.RoomInfo
 import com.example.virtualclasses.model.Student
 import com.google.firebase.auth.AuthResult
 import com.google.firebase.firestore.FirebaseFirestore
@@ -64,6 +65,44 @@ object FireStore {
                 listener(true)
             }.addOnFailureListener {
                 listener(false)
+            }
+    }
+
+    fun subscribe(roomInfo: RoomInfo, listener: (Boolean) -> Unit) {
+        mFireStoreRef.collection(Constants.USERS)
+            .document(roomInfo.userOwnerId)
+            .collection(Constants.ROOMS)
+            .document(roomInfo.roomId)
+            .get().addOnSuccessListener {
+                if(!it.exists()){
+                    listener(false)
+                    return@addOnSuccessListener
+                }
+                mFireStoreRef.collection(Constants.USERS)
+                    .document(FireAuth.getCurrentUser()!!.uid)
+                    .collection(Constants.SUBSCRIBED_ROOM).add(roomInfo).addOnSuccessListener {
+                        listener(true)
+                    }.addOnFailureListener {
+                        listener(false)
+                    }
+            }.addOnFailureListener {
+                listener(false)
+            }
+    }
+
+    fun getSubscribedRooms(userId: String, listener: (List<RoomInfo>?)->Unit){
+        mFireStoreRef.collection(Constants.USERS)
+            .document(userId)
+            .collection(Constants.SUBSCRIBED_ROOM)
+            .get()
+            .addOnSuccessListener {
+                if(it.isEmpty){
+                    listener(null)
+                    return@addOnSuccessListener
+                }
+                listener(it.toObjects(RoomInfo::class.java))
+            }.addOnFailureListener {
+                listener(null)
             }
     }
 }
