@@ -36,7 +36,8 @@ class SignInFragment : Fragment() {
                         Toast.makeText(context, "Something went wrong", Toast.LENGTH_SHORT).show()
                     }else{
                         Toast.makeText(context, "Successfully logged in", Toast.LENGTH_SHORT).show()
-                        //TODO: navigate to home page
+                        val action = SignInFragmentDirections.actionSignInFragmentToHomeFragment()
+                        findNavController().navigate(action)
                     }
                 }
             }

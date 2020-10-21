@@ -13,10 +13,35 @@
         <action
             android:id="@+id/action_signInFragment_to_signUpFragment"
             app:destination="@id/signUpFragment" />
+        <action
+            android:id="@+id/action_signInFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
     </fragment>
     <fragment
         android:id="@+id/signUpFragment"
         android:name="com.example.virtualclasses.ui.fragments.SignUpFragment"
         android:label="fragment_sign_up"
         tools:layout="@layout/fragment_sign_up" />
+    <fragment
+        android:id="@+id/myRoomsFragment"
+        android:name="com.example.virtualclasses.ui.fragments.MyRoomsFragment"
+        android:label="fragment_my_rooms"
+        tools:layout="@layout/fragment_my_rooms" />
+    <fragment
+        android:id="@+id/subscribedRoomFragment"
+        android:name="com.example.virtualclasses.ui.fragments.SubscribedRoomFragment"
+        android:label="fragment_subscribed_room"
+        tools:layout="@layout/fragment_subscribed_room" />
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.example.virtualclasses.ui.fragments.HomeFragment"
+        android:label="fragment_home"
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_homeFragment_to_myRoomsFragment"
+            app:destination="@id/myRoomsFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_subscribedRoomFragment"
+            app:destination="@id/subscribedRoomFragment" />
+    </fragment>
 </navigation>
