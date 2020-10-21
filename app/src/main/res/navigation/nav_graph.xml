@@ -26,7 +26,11 @@
         android:id="@+id/myRoomsFragment"
         android:name="com.example.virtualclasses.ui.fragments.MyRoomsFragment"
         android:label="fragment_my_rooms"
-        tools:layout="@layout/fragment_my_rooms" />
+        tools:layout="@layout/fragment_my_rooms" >
+        <action
+            android:id="@+id/action_myRoomsFragment_to_addRoomFragment"
+            app:destination="@id/addRoomFragment" />
+    </fragment>
     <fragment
         android:id="@+id/subscribedRoomFragment"
         android:name="com.example.virtualclasses.ui.fragments.SubscribedRoomFragment"
@@ -44,4 +48,9 @@
             android:id="@+id/action_homeFragment_to_subscribedRoomFragment"
             app:destination="@id/subscribedRoomFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/addRoomFragment"
+        android:name="com.example.virtualclasses.ui.fragments.AddRoomFragment"
+        android:label="fragment_add_room"
+        tools:layout="@layout/fragment_add_room" />
 </navigation>

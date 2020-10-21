@@ -26,4 +26,8 @@ object FireAuth{
             listener(it, false)
         }
     }
+
+    fun getCurrentUser() =
+        mAuth.currentUser
+
 }

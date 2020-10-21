@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.fragments.AddRoomFragment"
+    android:orientation="vertical"
+    android:paddingStart="16dp"
+    android:paddingEnd="16dp"
+    android:gravity="center">
+
+    <EditText
+        android:id="@+id/roomTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="title"/>
+    <EditText
+        android:id="@+id/roomDescription"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="description"/>
+    <Button
+        android:id="@+id/createRoom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="create Room now"/>
+
+</LinearLayout>

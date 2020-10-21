@@ -1,6 +1,7 @@
 package com.example.virtualclasses.firebase
 
 import com.example.virtualclasses.local.Constants
+import com.example.virtualclasses.model.Room
 import com.example.virtualclasses.model.Student
 import com.google.firebase.auth.AuthResult
 import com.google.firebase.firestore.FirebaseFirestore
@@ -37,5 +38,32 @@ object FireStore {
         }.addOnFailureListener {
             listener(false)
         }
+    }
+
+    fun getMyAllRooms(userId: String, listener: (MutableList<Room>?) -> Unit){
+        mFireStoreRef.collection(Constants.USERS)
+            .document(userId)
+            .collection(Constants.ROOMS)
+            .get()
+            .addOnSuccessListener {
+                val data = it.toObjects(Room::class.java)
+                listener(data)
+            }.addOnFailureListener {
+                listener(null)
+            }
+    }
+
+    fun createRoom(room: Room, userId: String, listener: (Boolean)->Unit){
+        val roomRef = mFireStoreRef.collection(Constants.USERS)
+            .document(userId)
+            .collection(Constants.ROOMS).document()
+
+        room.roomId = roomRef.id
+
+         roomRef.set(room).addOnSuccessListener {
+                listener(true)
+            }.addOnFailureListener {
+                listener(false)
+            }
     }
 }
