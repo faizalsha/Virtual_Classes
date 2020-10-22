@@ -12,11 +12,11 @@ import com.example.virtualclasses.R
 import com.example.virtualclasses.firebase.FireAuth
 import com.example.virtualclasses.firebase.FireStore
 import com.example.virtualclasses.model.Room
-import com.example.virtualclasses.ui.adapter.RoomAdapter
+import com.example.virtualclasses.ui.adapter.RoomsAdapter
 import kotlinx.android.synthetic.main.fragment_my_rooms.*
 
 class MyRoomsFragment : Fragment() {
-    lateinit var roomAdapter: RoomAdapter
+    lateinit var roomsAdapter: RoomsAdapter
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -43,10 +43,10 @@ class MyRoomsFragment : Fragment() {
     }
 
     private fun setupRecyclerView(it: MutableList<Room>) {
-        roomAdapter = RoomAdapter(it, requireContext())
+        roomsAdapter = RoomsAdapter(it, requireContext())
         roomRecyclerView.apply {
             layoutManager = LinearLayoutManager(context)
-            adapter = roomAdapter
+            adapter = roomsAdapter
         }
     }
 

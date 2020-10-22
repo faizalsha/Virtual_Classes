@@ -30,10 +30,18 @@
         <action
             android:id="@+id/action_myRoomsFragment_to_addRoomFragment"
             app:destination="@id/addRoomFragment" />
+        <action
+            android:id="@+id/action_myRoomsFragment_to_weekDaysFragment"
+            app:destination="@id/weekDaysFragment">
+            <argument
+                android:name="dayIndex"
+                app:argType="integer"
+                android:defaultValue="7"/>
+        </action>
     </fragment>
     <fragment
         android:id="@+id/subscribedRoomFragment"
-        android:name="com.example.virtualclasses.ui.fragments.SubscribedRoomFragment"
+        android:name="com.example.virtualclasses.ui.fragments.SubscribedRoomsFragment"
         android:label="fragment_subscribed_room"
         tools:layout="@layout/fragment_subscribed_room" >
         <action
@@ -62,4 +70,9 @@
         android:name="com.example.virtualclasses.ui.fragments.SubscribeNewRoomFragment"
         android:label="fragment_subscribe_new_room"
         tools:layout="@layout/fragment_subscribe_new_room" />
+    <fragment
+        android:id="@+id/weekDaysFragment"
+        android:name="com.example.virtualclasses.ui.fragments.WeekDaysFragment"
+        android:label="fragment_week_days"
+        tools:layout="@layout/fragment_week_days" />
 </navigation>

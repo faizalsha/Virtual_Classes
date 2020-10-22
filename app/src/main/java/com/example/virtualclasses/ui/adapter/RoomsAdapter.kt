@@ -4,20 +4,27 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.example.virtualclasses.R
 import com.example.virtualclasses.model.Room
+import com.example.virtualclasses.ui.fragments.MyRoomsFragmentDirections
 import kotlinx.android.synthetic.main.item_room.view.*
 
-class RoomAdapter(
+class RoomsAdapter(
     private val data: List<Room>,
     private val context: Context
-) : RecyclerView.Adapter<RoomAdapter.RoomViewHolder>() {
+) : RecyclerView.Adapter<RoomsAdapter.RoomViewHolder>() {
 
     class RoomViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun bind(item: Room, position: Int){
             itemView.roomTitle.text = item.roomTitle
             itemView.roomDescription.text = item.roomId
+            itemView.setOnClickListener {
+                val action =
+                    MyRoomsFragmentDirections.actionMyRoomsFragmentToWeekDaysFragment(position)
+                it.findNavController().navigate(action)
+            }
         }
     }
 

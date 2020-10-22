@@ -11,11 +11,11 @@ import com.example.virtualclasses.R
 import com.example.virtualclasses.firebase.FireAuth
 import com.example.virtualclasses.firebase.FireStore
 import com.example.virtualclasses.model.RoomInfo
-import com.example.virtualclasses.ui.adapter.SubscribedRoomAdapter
+import com.example.virtualclasses.ui.adapter.SubscribedRoomsAdapter
 import kotlinx.android.synthetic.main.fragment_subscribed_room.*
 
-class SubscribedRoomFragment : Fragment() {
-    lateinit var subscribedRoomAdapter: SubscribedRoomAdapter
+class SubscribedRoomsFragment : Fragment() {
+    lateinit var subscribedRoomsAdapter: SubscribedRoomsAdapter
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -27,7 +27,7 @@ class SubscribedRoomFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         subscribeRoomButton.setOnClickListener {
-            val action = SubscribedRoomFragmentDirections
+            val action = SubscribedRoomsFragmentDirections
                 .actionSubscribedRoomFragmentToSubscribeNewRoomFragment()
             findNavController().navigate(action)
         }
@@ -38,10 +38,10 @@ class SubscribedRoomFragment : Fragment() {
 
     private fun setupRecyclerView(data: List<RoomInfo>?) {
         if(data == null) return
-        subscribedRoomAdapter = SubscribedRoomAdapter(data, requireContext())
+        subscribedRoomsAdapter = SubscribedRoomsAdapter(data, requireContext())
         subscribedRoom.apply {
             layoutManager = LinearLayoutManager(context)
-            adapter = subscribedRoomAdapter
+            adapter = subscribedRoomsAdapter
         }
     }
 }
