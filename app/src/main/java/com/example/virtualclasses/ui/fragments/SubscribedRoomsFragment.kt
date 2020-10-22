@@ -38,6 +38,7 @@ class SubscribedRoomsFragment : Fragment() {
 
     private fun setupRecyclerView(data: List<RoomInfo>?) {
         if(data == null) return
+        if(context == null) return
         subscribedRoomsAdapter = SubscribedRoomsAdapter(data, requireContext())
         subscribedRoom.apply {
             layoutManager = LinearLayoutManager(context)

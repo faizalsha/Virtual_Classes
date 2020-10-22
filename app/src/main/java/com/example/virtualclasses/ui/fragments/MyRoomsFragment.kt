@@ -43,10 +43,12 @@ class MyRoomsFragment : Fragment() {
     }
 
     private fun setupRecyclerView(it: MutableList<Room>) {
-        roomsAdapter = RoomsAdapter(it, requireContext())
-        roomRecyclerView.apply {
-            layoutManager = LinearLayoutManager(context)
-            adapter = roomsAdapter
+        if(context != null){
+            roomsAdapter = RoomsAdapter(it, requireContext())
+            roomRecyclerView.apply {
+                layoutManager = LinearLayoutManager(context)
+                adapter = roomsAdapter
+            }
         }
     }
 
