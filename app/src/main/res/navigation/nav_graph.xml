@@ -33,10 +33,6 @@
         <action
             android:id="@+id/action_myRoomsFragment_to_weekDaysFragment"
             app:destination="@id/weekDaysFragment">
-            <argument
-                android:name="dayIndex"
-                app:argType="integer"
-                android:defaultValue="7"/>
         </action>
     </fragment>
     <fragment
@@ -74,5 +70,19 @@
         android:id="@+id/weekDaysFragment"
         android:name="com.example.virtualclasses.ui.fragments.WeekDaysFragment"
         android:label="fragment_week_days"
-        tools:layout="@layout/fragment_week_days" />
+        tools:layout="@layout/fragment_week_days" >
+        <action
+            android:id="@+id/action_weekDaysFragment_to_editPerDayScheduleFragment"
+            app:destination="@id/editPerDayScheduleFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/editPerDayScheduleFragment"
+        android:name="com.example.virtualclasses.ui.fragments.EditPerDayScheduleFragment"
+        android:label="fragment_edit_per_day_schedule"
+        tools:layout="@layout/fragment_edit_per_day_schedule" >
+        <argument
+            android:name="dayOfWeekIndex"
+            app:argType="integer"
+            android:defaultValue="7" />
+    </fragment>
 </navigation>
