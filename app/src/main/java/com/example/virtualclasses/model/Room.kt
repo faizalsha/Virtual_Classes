@@ -1,5 +1,9 @@
 package com.example.virtualclasses.model
 
+import android.os.Parcelable
+import kotlinx.android.parcel.Parcelize
+
+@Parcelize
 data class Room(
     var roomId: String,
     val roomTitle: String,
@@ -8,6 +12,6 @@ data class Room(
     val roomOwnerUserId: String,
     val roomOwnerEmail:String,
     val subscribedUser: Int,
-    val createdAt: String) {
+    val createdAt: String) : Parcelable {
     constructor():this("", "",  "" ,"", "", "", 0, "")
 }

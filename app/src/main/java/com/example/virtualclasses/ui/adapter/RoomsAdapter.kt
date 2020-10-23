@@ -22,7 +22,7 @@ class RoomsAdapter(
             itemView.roomDescription.text = item.roomId
             itemView.setOnClickListener {
                 val action =
-                    MyRoomsFragmentDirections.actionMyRoomsFragmentToWeekDaysFragment()
+                    MyRoomsFragmentDirections.actionMyRoomsFragmentToWeekDaysFragment(item)
                 it.findNavController().navigate(action)
             }
         }

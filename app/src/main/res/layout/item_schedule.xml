@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="12dp">
+
+    <LinearLayout
+        android:id="@+id/timingView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <TextView
+            android:id="@+id/startTimeTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="10:00AM"
+            android:textSize="20sp"
+            android:gravity="center_horizontal"/>
+        <TextView
+            android:id="@+id/toTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="to"
+            android:gravity="center_horizontal"/>
+        <TextView
+            android:id="@+id/endTimeTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="11:00AM"
+            android:textSize="20sp"
+            android:gravity="center_horizontal"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/timingView"
+        android:orientation="vertical"
+        android:layout_marginLeft="8dp"
+        android:layout_alignBottom="@id/timingView"
+        android:layout_alignTop="@id/timingView">
+
+        <TextView
+            android:id="@+id/scheduleTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:text="Foundation of Computer Science"
+            android:layout_weight="1"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/scheduleDescription"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:text="Rinkaj Goyal Sir"/>
+
+    </LinearLayout>
+</RelativeLayout>
