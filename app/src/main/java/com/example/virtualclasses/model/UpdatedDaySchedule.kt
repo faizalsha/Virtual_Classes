@@ -4,10 +4,10 @@ import java.sql.Date
 
 
 class UpdatedDaySchedule(
-    override var schedules: List<Schedule>,
+    override var schedules: MutableList<Schedule>,
     override val roomId: String,
     override val ownerId: String,
     val date: Date
 ) : DaySchedule{
-    constructor():this(listOf(), "", "", Date(0))
+    constructor():this(mutableListOf(), "", "", Date(0))
 }

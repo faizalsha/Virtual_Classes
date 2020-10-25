@@ -1,7 +1,7 @@
 package com.example.virtualclasses.model
 
 interface DaySchedule {
-    var schedules: List<Schedule>
+    var schedules: MutableList<Schedule>
     val roomId: String
     val ownerId: String
 }

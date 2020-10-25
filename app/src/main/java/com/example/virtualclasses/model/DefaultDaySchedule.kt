@@ -13,10 +13,10 @@ enum class WeekDay{
 }
 
 class DefaultDaySchedule(
-    override var schedules: List<Schedule>,
+    override var schedules: MutableList<Schedule>,
     override val roomId: String,
     override val ownerId: String,
     val day: WeekDay
 ) : DaySchedule{
-    constructor():this(listOf(), "", "", WeekDay.MONDAY)
+    constructor():this(mutableListOf(), "", "", WeekDay.MONDAY)
 }
