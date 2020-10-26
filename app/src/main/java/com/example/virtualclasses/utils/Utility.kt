@@ -3,13 +3,15 @@ package com.example.virtualclasses.utils
 import android.app.TimePickerDialog
 import android.content.Context
 import android.media.midi.MidiDevice
+import com.example.virtualclasses.model.DaySchedule
 import com.example.virtualclasses.model.MidDay
+import com.example.virtualclasses.model.Schedule
 import com.example.virtualclasses.model.ScheduleTime
 import java.util.*
 import kotlin.math.min
 
 object Utility {
-    public fun selectTime(context: Context, onTimeSelected: (ScheduleTime)->Unit){
+    fun selectTime(context: Context, onTimeSelected: (ScheduleTime)->Unit){
         val calendar = Calendar.getInstance()
         val hour = calendar.get(Calendar.HOUR)
         val minute = calendar.get(Calendar.MINUTE)
@@ -25,5 +27,23 @@ object Utility {
         }
         val timePickerDialog = TimePickerDialog(context, listener, hour, minute, false)
         timePickerDialog.show()
+    }
+
+
+
+    fun validateSchedule(daySchedule: DaySchedule, scheduleToBeInserted: Schedule): Boolean{
+        //start time and end time must be valid
+        if(scheduleToBeInserted.startTime.equals(scheduleToBeInserted.endTime)) return false
+        val scheduleList = daySchedule.schedules
+        if(scheduleList.size == 0) return true
+        scheduleList.sort()
+        if(scheduleToBeInserted.endTime.isBeforeOrEqual(scheduleList[0].startTime)) return true
+        for(i in 1 until scheduleList.size){
+            if(scheduleList[i - 1].endTime.isBeforeOrEqual(scheduleToBeInserted.startTime)
+                && scheduleToBeInserted.endTime.isBeforeOrEqual(scheduleList[i].startTime))
+                return true
+        }
+        if (scheduleList[scheduleList.size - 1].endTime.isBeforeOrEqual(scheduleToBeInserted.startTime)) return true
+        return false
     }
 }

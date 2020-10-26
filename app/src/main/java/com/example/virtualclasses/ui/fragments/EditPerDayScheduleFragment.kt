@@ -53,7 +53,10 @@ class EditPerDayScheduleFragment : Fragment() {
             if(context == null) return@setOnClickListener
             ScheduleDialogFragment{
                 Log.d(TAG, "onViewCreated: $it")
-                updateSchedule(it)
+                if(Utility.validateSchedule(defaultDaySchedule, it))
+                    updateSchedule(it)
+                else
+                    Toast.makeText(context, "conflicting schedule", Toast.LENGTH_LONG).show()
             }.show(parentFragmentManager, "schedule fragment")
         }
 

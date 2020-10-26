@@ -8,7 +8,7 @@ data class Schedule(
     var additionalInfo: String,
     var startTime: ScheduleTime,
     var endTime: ScheduleTime
-){
+): Comparable<Schedule>{
     constructor():this("", "", "", "", ScheduleTime(), ScheduleTime())
     fun updateWith(schedule: Schedule){
         this.title = schedule.title
@@ -17,5 +17,11 @@ data class Schedule(
         this.additionalInfo = schedule.additionalInfo
         this.startTime = schedule.startTime
         this.endTime = schedule.endTime
+    }
+
+    override fun compareTo(other: Schedule): Int {
+        if(this.startTime.isBefore(other.startTime)) return -1
+        if(other.startTime.isBefore(this.startTime)) return 1
+        return 0
     }
 }
