@@ -1,11 +1,10 @@
 package com.example.virtualclasses.firebase
 
 import com.example.virtualclasses.local.Constants
-import com.example.virtualclasses.model.Room
-import com.example.virtualclasses.model.RoomInfo
-import com.example.virtualclasses.model.Student
+import com.example.virtualclasses.model.*
 import com.google.firebase.auth.AuthResult
 import com.google.firebase.firestore.FirebaseFirestore
+import java.lang.Exception
 
 object FireStore {
 
@@ -101,6 +100,60 @@ object FireStore {
                     return@addOnSuccessListener
                 }
                 listener(it.toObjects(RoomInfo::class.java))
+            }.addOnFailureListener {
+                listener(null)
+            }
+    }
+    fun saveDefaultDaySchedule(dayOfWeekIndex: Int, defaultDaySchedule: DefaultDaySchedule, roomId: String, listener: (Boolean) -> Unit){
+        var dayOfWeek = WeekDay.MONDAY.toString()
+        when(dayOfWeekIndex){
+            0 -> dayOfWeek = WeekDay.MONDAY.toString()
+            1 -> dayOfWeek = WeekDay.TUESDAY.toString()
+            2 -> dayOfWeek = WeekDay.WEDNESDAY.toString()
+            3 -> dayOfWeek = WeekDay.THURSDAY.toString()
+            4 -> dayOfWeek = WeekDay.FRIDAY.toString()
+            5 -> dayOfWeek = WeekDay.SATURDAY.toString()
+            6 -> dayOfWeek = WeekDay.SUNDAY.toString()
+        }
+        //todo: if current user is null send user to login screen and clear shared preferences
+        val userId = FireAuth.getCurrentUser()!!.uid
+        mFireStoreRef.collection(Constants.USERS)
+            .document(userId)
+            .collection(Constants.ROOMS)
+            .document(roomId)
+            .collection(Constants.DEFAULT)
+            .document(dayOfWeek)
+            .set(defaultDaySchedule).addOnSuccessListener {
+                listener(true)
+            }.addOnFailureListener {
+                listener(false)
+            }
+    }
+    fun getDefaultDaySchedule(dayOfWeekIndex: Int, roomId: String, listener: (DefaultDaySchedule?) -> Unit){
+        val userId = FireAuth.getCurrentUser()?.uid ?: return
+        var dayOfWeek = WeekDay.MONDAY.toString()
+        when(dayOfWeekIndex){
+            0 -> dayOfWeek = WeekDay.MONDAY.toString()
+            1 -> dayOfWeek = WeekDay.TUESDAY.toString()
+            2 -> dayOfWeek = WeekDay.WEDNESDAY.toString()
+            3 -> dayOfWeek = WeekDay.THURSDAY.toString()
+            4 -> dayOfWeek = WeekDay.FRIDAY.toString()
+            5 -> dayOfWeek = WeekDay.SATURDAY.toString()
+            6 -> dayOfWeek = WeekDay.SUNDAY.toString()
+        }
+        mFireStoreRef.collection(Constants.USERS)
+            .document(userId)
+            .collection(Constants.ROOMS)
+            .document(roomId)
+            .collection(Constants.DEFAULT)
+            .document(dayOfWeek)
+            .get().addOnSuccessListener {
+                try {
+                    val daySchedule = it.toObject(DefaultDaySchedule::class.java)
+                    listener(daySchedule)
+                }catch (e: Exception){
+                    listener(null)
+                }
             }.addOnFailureListener {
                 listener(null)
             }
