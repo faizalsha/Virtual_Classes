@@ -22,6 +22,10 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        setupListener()
+    }
+
+    private fun setupListener(){
         subscribedRoom.setOnClickListener {
             val action = HomeFragmentDirections.actionHomeFragmentToSubscribedRoomFragment()
             findNavController().navigate(action)

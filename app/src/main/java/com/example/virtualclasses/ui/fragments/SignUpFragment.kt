@@ -24,6 +24,10 @@ class SignUpFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        setupListener()
+    }
+
+    private fun setupListener(){
         registerButton.setOnClickListener {
             val name = registerName.text.toString().trim()
             val email = registerEmail.text.toString().trim()

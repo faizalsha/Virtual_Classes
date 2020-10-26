@@ -24,6 +24,11 @@ class SignInFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        setupListener()
+    }
+
+
+    private fun setupListener(){
         buttonSignIn.setOnClickListener {
             val email = editTextTextEmail.text.trim().toString()
             val password = editTextPassword.text.trim().toString()
@@ -43,7 +48,7 @@ class SignInFragment : Fragment() {
             }
         }
         textViewRegister.setOnClickListener {
-           val action = SignInFragmentDirections.actionSignInFragmentToSignUpFragment()
+            val action = SignInFragmentDirections.actionSignInFragmentToSignUpFragment()
             findNavController().navigate(action)
         }
     }

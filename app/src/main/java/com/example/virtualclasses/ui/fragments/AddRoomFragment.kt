@@ -24,9 +24,13 @@ class AddRoomFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        setupListener()
+    }
+    private fun setupListener(){
         createRoom.setOnClickListener {
             val title = roomTitle.text.toString().trim()
             val desc = roomDescription.text.toString().trim()
+            if(title.isEmpty() || desc.isEmpty()) return@setOnClickListener
             //if current user is null log out and send to login screen
             val room = Room("",
                 title,

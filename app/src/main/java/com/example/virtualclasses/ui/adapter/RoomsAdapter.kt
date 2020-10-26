@@ -12,7 +12,7 @@ import com.example.virtualclasses.ui.fragments.MyRoomsFragmentDirections
 import kotlinx.android.synthetic.main.item_room.view.*
 
 class RoomsAdapter(
-    private val data: List<Room>,
+    private val data: MutableList<Room>,
     private val context: Context
 ) : RecyclerView.Adapter<RoomsAdapter.RoomViewHolder>() {
 

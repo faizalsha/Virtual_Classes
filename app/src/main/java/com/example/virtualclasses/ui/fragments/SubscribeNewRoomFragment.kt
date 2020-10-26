@@ -23,6 +23,9 @@ class SubscribeNewRoomFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        setupListener()
+    }
+    private fun setupListener(){
         subscribeNewRoomButton.setOnClickListener {
             val ownerId = roomOwnerId.text.toString()
             val roomId = roomId.text.toString()

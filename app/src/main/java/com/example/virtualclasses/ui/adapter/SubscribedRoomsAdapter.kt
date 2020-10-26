@@ -10,7 +10,7 @@ import com.example.virtualclasses.model.RoomInfo
 import kotlinx.android.synthetic.main.item_subscribed_room.view.*
 
 class SubscribedRoomsAdapter(
-    private val data: List<RoomInfo>,
+    private val data: MutableList<RoomInfo>,
     private val context: Context) : RecyclerView.Adapter<SubscribedRoomsAdapter.SubscribedRoomHolder>() {
     class SubscribedRoomHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
         fun bind(item: RoomInfo, position: Int){
