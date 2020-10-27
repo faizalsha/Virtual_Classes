@@ -15,7 +15,7 @@ class SubscribedRoomsAdapter(
     class SubscribedRoomHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
         fun bind(item: RoomInfo, position: Int){
             itemView.subscribedRoomId.text = item.roomId
-            itemView.subscribedRoomOwnerId.text = item.userOwnerId
+            itemView.subscribedRoomOwnerId.text = item.ownerId
         }
     }
 

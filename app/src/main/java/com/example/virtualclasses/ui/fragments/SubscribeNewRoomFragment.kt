@@ -29,7 +29,7 @@ class SubscribeNewRoomFragment : Fragment() {
         subscribeNewRoomButton.setOnClickListener {
             val ownerId = roomOwnerId.text.toString()
             val roomId = roomId.text.toString()
-            val roomInfo = RoomInfo(ownerId, roomId)
+            val roomInfo = RoomInfo("","",ownerId, roomId)
             //todo: first check ownerId != currentUser.uid
             FireStore.subscribe(roomInfo){
                 if(!it){

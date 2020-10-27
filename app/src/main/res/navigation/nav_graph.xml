@@ -74,20 +74,10 @@
         <action
             android:id="@+id/action_weekDaysFragment_to_editPerDayScheduleFragment"
             app:destination="@id/editPerDayScheduleFragment" />
-        <argument android:name="room"
-            app:argType="com.example.virtualclasses.model.Room"/>
     </fragment>
     <fragment
         android:id="@+id/editPerDayScheduleFragment"
         android:name="com.example.virtualclasses.ui.fragments.EditPerDayScheduleFragment"
         android:label="fragment_edit_per_day_schedule"
-        tools:layout="@layout/fragment_edit_per_day_schedule" >
-        <argument
-            android:name="dayOfWeekIndex"
-            app:argType="integer"
-            android:defaultValue="7" />
-        <argument
-            android:name="room"
-            app:argType="com.example.virtualclasses.model.Room" />
-    </fragment>
+        tools:layout="@layout/fragment_edit_per_day_schedule" />
 </navigation>

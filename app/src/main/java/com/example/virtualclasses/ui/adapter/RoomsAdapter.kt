@@ -8,6 +8,7 @@ import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.example.virtualclasses.R
 import com.example.virtualclasses.model.Room
+import com.example.virtualclasses.model.RoomDetails
 import com.example.virtualclasses.ui.fragments.MyRoomsFragmentDirections
 import kotlinx.android.synthetic.main.item_room.view.*
 
@@ -21,9 +22,9 @@ class RoomsAdapter(
             itemView.roomTitle.text = item.roomTitle
             itemView.roomDescription.text = item.roomId
             itemView.setOnClickListener {
-                val action =
-                    MyRoomsFragmentDirections.actionMyRoomsFragmentToWeekDaysFragment(item)
-                it.findNavController().navigate(action)
+//                val action =
+//                    MyRoomsFragmentDirections.actionMyRoomsFragmentToWeekDaysFragment(item)
+//                it.findNavController().navigate(action)
             }
         }
     }

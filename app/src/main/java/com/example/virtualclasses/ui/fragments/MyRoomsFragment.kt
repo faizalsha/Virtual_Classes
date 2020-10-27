@@ -12,12 +12,13 @@ import com.example.virtualclasses.R
 import com.example.virtualclasses.firebase.FireAuth
 import com.example.virtualclasses.firebase.FireStore
 import com.example.virtualclasses.model.Room
+import com.example.virtualclasses.model.RoomDetails
 import com.example.virtualclasses.ui.adapter.RoomsAdapter
 import kotlinx.android.synthetic.main.fragment_my_rooms.*
 
 class MyRoomsFragment : Fragment() {
     lateinit var roomsAdapter: RoomsAdapter
-    private val rooms: MutableList<Room> = mutableListOf()
+    private val roomDetails: MutableList<Room> = mutableListOf()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -36,9 +37,9 @@ class MyRoomsFragment : Fragment() {
                 Toast.makeText(context, "No rooms found", Toast.LENGTH_LONG).show()
                 return@getMyAllRooms
             } else {
-                rooms.clear()
+                roomDetails.clear()
                 it.forEach{ room ->
-                    rooms.add(room)
+                    roomDetails.add(room)
                 }
                 roomsAdapter.notifyDataSetChanged()
             }
@@ -51,7 +52,7 @@ class MyRoomsFragment : Fragment() {
 
     private fun setupRecyclerView() {
         if (context == null) return
-        roomsAdapter = RoomsAdapter(rooms, requireContext())
+        roomsAdapter = RoomsAdapter(roomDetails, requireContext())
         roomRecyclerView.apply {
             layoutManager = LinearLayoutManager(context)
             adapter = roomsAdapter

@@ -40,27 +40,27 @@ object FireStore {
         }
     }
 
-    fun getMyAllRooms(userId: String, listener: (MutableList<Room>?) -> Unit){
+    fun getMyAllRooms(userId: String, listener: (MutableList<RoomDetails>?) -> Unit){
         mFireStoreRef.collection(Constants.USERS)
             .document(userId)
             .collection(Constants.ROOMS)
             .get()
             .addOnSuccessListener {
-                val data = it.toObjects(Room::class.java)
+                val data = it.toObjects(RoomDetails::class.java)
                 listener(data)
             }.addOnFailureListener {
                 listener(null)
             }
     }
 
-    fun createRoom(room: Room, userId: String, listener: (Boolean)->Unit){
+    fun createRoom(roomDetails: RoomDetails, userId: String, listener: (Boolean)->Unit){
         val roomRef = mFireStoreRef.collection(Constants.USERS)
             .document(userId)
             .collection(Constants.ROOMS).document()
 
-        room.roomId = roomRef.id
+        roomDetails.roomId = roomRef.id
 
-         roomRef.set(room).addOnSuccessListener {
+         roomRef.set(roomDetails).addOnSuccessListener {
                 listener(true)
             }.addOnFailureListener {
                 listener(false)
@@ -69,7 +69,7 @@ object FireStore {
 
     fun subscribe(roomInfo: RoomInfo, listener: (Boolean) -> Unit) {
         mFireStoreRef.collection(Constants.USERS)
-            .document(roomInfo.userOwnerId)
+            .document(roomInfo.ownerId)
             .collection(Constants.ROOMS)
             .document(roomInfo.roomId)
             .get().addOnSuccessListener {

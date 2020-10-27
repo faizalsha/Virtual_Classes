@@ -26,13 +26,19 @@ class HomeFragment : Fragment() {
     }
 
     private fun setupListener(){
-        subscribedRoom.setOnClickListener {
-            val action = HomeFragmentDirections.actionHomeFragmentToSubscribedRoomFragment()
-            findNavController().navigate(action)
+//        subscribedRoom.setOnClickListener {
+//            val action = HomeFragmentDirections.actionHomeFragmentToSubscribedRoomFragment()
+//            findNavController().navigate(action)
+//        }
+//        myRoom.setOnClickListener {
+//            val action = HomeFragmentDirections.actionHomeFragmentToMyRoomsFragment()
+//            findNavController().navigate(action)
+//        }
+        subscribedRoomsView.setOnClickListener {
+            SubscribedRoomBottomSheetFragment().show(parentFragmentManager, "subscribed room bottom sheet")
         }
-        myRoom.setOnClickListener {
-            val action = HomeFragmentDirections.actionHomeFragmentToMyRoomsFragment()
-            findNavController().navigate(action)
+        myRoomsView.setOnClickListener {
+            MyRoomBottomSheetFragment().show(parentFragmentManager, "my room bottom sheet")
         }
     }
 }

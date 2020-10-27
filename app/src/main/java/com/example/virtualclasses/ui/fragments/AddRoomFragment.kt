@@ -9,7 +9,7 @@ import android.widget.Toast
 import com.example.virtualclasses.R
 import com.example.virtualclasses.firebase.FireAuth
 import com.example.virtualclasses.firebase.FireStore
-import com.example.virtualclasses.model.Room
+import com.example.virtualclasses.model.RoomDetails
 import kotlinx.android.synthetic.main.fragment_add_room.*
 import java.util.*
 
@@ -32,7 +32,7 @@ class AddRoomFragment : Fragment() {
             val desc = roomDescription.text.toString().trim()
             if(title.isEmpty() || desc.isEmpty()) return@setOnClickListener
             //if current user is null log out and send to login screen
-            val room = Room("",
+            val room = RoomDetails("",
                 title,
                 desc,
                 FireAuth.getCurrentUser()!!.uid,

@@ -1,5 +1,10 @@
 package com.example.virtualclasses.model
 
-data class RoomInfo(val userOwnerId: String, val roomId: String){
-    constructor():this("", "")
+data class RoomInfo(
+    override var roomId: String,
+    override var roomTitle: String,
+    override var roomDescription: String,
+    override var ownerId: String
+): Room{
+    constructor():this("", "", "", "")
 }

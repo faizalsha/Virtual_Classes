@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -7,15 +7,99 @@
     android:orientation="vertical"
     android:gravity="center">
 
-    <Button
-        android:id="@+id/subscribedRoom"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="subscribed Rooms"/>
-    <Button
-        android:id="@+id/myRoom"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="My Rooms"/>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
-</LinearLayout>
+        <LinearLayout
+            android:id="@+id/homeRoomNavigation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="12dp">
+            <LinearLayout
+                android:id="@+id/subscribedRoomsView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_weight="1"
+                android:padding="20dp"
+                android:background="@drawable/bg_rooms_home"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:fontFamily="@font/roboto"
+                    android:gravity="center_horizontal"
+                    android:text="Subscribed Rooms"
+                    android:textColor="@color/green"
+                    android:textSize="16sp" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="click to view"
+                    android:layout_gravity="center_horizontal"/>
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/myRoomsView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_weight="1"
+                android:padding="20dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:background="@drawable/bg_rooms_home">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:fontFamily="@font/roboto"
+                    android:text="My Rooms"
+                    android:textColor="@color/green"
+                    android:textSize="16sp" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="click to view"
+                    android:layout_gravity="center_horizontal"/>
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <View
+            android:id="@+id/roomAndTodayScheduleDivider"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="?android:attr/dividerVertical"
+            android:layout_below="@id/homeRoomNavigation"
+            android:layout_marginTop="16dp"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/roomAndTodayScheduleDivider"
+            android:text="Today's Schedule"
+            android:paddingStart="16dp"
+            android:paddingLeft="16dp"
+            android:textSize="20sp"
+            android:layout_marginTop="12dp"
+            android:fontFamily="@font/roboto"/>
+
+    </RelativeLayout>
+
+<!--    <Button-->
+<!--        android:id="@+id/subscribedRoom"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:text="subscribed Rooms"/>-->
+<!--    <Button-->
+<!--        android:id="@+id/myRoom"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:text="My Rooms"/>-->
+
+</ScrollView>

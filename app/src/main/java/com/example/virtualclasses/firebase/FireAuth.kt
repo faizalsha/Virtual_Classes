@@ -5,6 +5,7 @@ import android.widget.Toast
 import com.example.virtualclasses.model.Student
 import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
 
 object FireAuth{
 
