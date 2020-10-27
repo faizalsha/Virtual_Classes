@@ -57,6 +57,7 @@ class SubscribedRoomsFragment : Fragment() {
             it.forEach { room ->
                 rooms.add(room)
             }
+            subscribedRoomsAdapter.notifyDataSetChanged()
         }
     }
 }
