@@ -1,22 +1,17 @@
 package com.example.virtualclasses.ui.fragments
 
-import android.opengl.Visibility
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.virtualclasses.R
 import com.example.virtualclasses.firebase.FireAuth
 import com.example.virtualclasses.firebase.FireStore
 import com.example.virtualclasses.model.Room
-import com.example.virtualclasses.model.RoomInfo
 import com.example.virtualclasses.ui.adapter.MyAdapter
-import com.example.virtualclasses.ui.adapter.SubscribedRoomsAdapter
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
-import kotlinx.android.synthetic.main.fragment_subscribed_room.*
 import kotlinx.android.synthetic.main.fragment_subscribed_room_bottom_sheet.*
 
 class SubscribedRoomBottomSheetFragment : BottomSheetDialogFragment() {
