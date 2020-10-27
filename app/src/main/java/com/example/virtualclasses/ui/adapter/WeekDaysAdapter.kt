@@ -8,7 +8,7 @@ import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.example.virtualclasses.R
 import com.example.virtualclasses.model.RoomDetails
-import com.example.virtualclasses.ui.fragments.WeekDaysFragmentDirections
+//import com.example.virtualclasses.ui.fragments.WeekDaysFragmentDirections
 import kotlinx.android.synthetic.main.item_day.view.*
 
 //class WeekDaysAdapter(private val weekDays: ArrayList<String>, val roomDetails: RoomDetails, val context: Context): RecyclerView.Adapter<WeekDaysAdapter.WeekDaysHolder>() {

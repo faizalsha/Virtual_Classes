@@ -89,7 +89,7 @@ object FireStore {
             }
     }
 
-    fun getSubscribedRooms(userId: String, listener: (List<RoomInfo>?)->Unit){
+    fun getSubscribedRooms(userId: String, listener: (MutableList<RoomInfo>?)->Unit){
         mFireStoreRef.collection(Constants.USERS)
             .document(userId)
             .collection(Constants.SUBSCRIBED_ROOM)

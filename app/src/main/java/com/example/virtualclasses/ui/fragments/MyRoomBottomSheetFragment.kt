@@ -1,23 +1,22 @@
 package com.example.virtualclasses.ui.fragments
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.virtualclasses.R
 import com.example.virtualclasses.firebase.FireAuth
 import com.example.virtualclasses.firebase.FireStore
 import com.example.virtualclasses.model.Room
-import com.example.virtualclasses.ui.adapter.MyAdapter
+import com.example.virtualclasses.ui.adapter.RoomsAdapter
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import kotlinx.android.synthetic.main.fragment_my_room_bottom_sheet.*
 import kotlinx.android.synthetic.main.fragment_my_room_bottom_sheet.backButton
-import kotlinx.android.synthetic.main.fragment_subscribed_room_bottom_sheet.*
 
 class MyRoomBottomSheetFragment : BottomSheetDialogFragment() {
-    lateinit var myRoomAdapter: MyAdapter
+    lateinit var roomsRoomAdapter: RoomsAdapter
     private val rooms: ArrayList<Room> = arrayListOf()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -35,12 +34,15 @@ class MyRoomBottomSheetFragment : BottomSheetDialogFragment() {
     }
     private fun setupRecyclerView(){
         if(context == null) return
-        myRoomAdapter = MyAdapter(rooms, requireContext()){
-            //todo: send to different fragment
+        roomsRoomAdapter = RoomsAdapter(rooms, requireContext()){
+            val action =
+                HomeFragmentDirections.actionHomeFragmentToEditMyRoomSchedule(it)
+            findNavController().navigate(action)
+            dismiss()
         }
         myRoomBottomRecyclerView.apply {
             layoutManager = LinearLayoutManager(context)
-            adapter = myRoomAdapter
+            adapter = roomsRoomAdapter
         }
     }
     private fun setupFirebase(){
@@ -58,7 +60,7 @@ class MyRoomBottomSheetFragment : BottomSheetDialogFragment() {
             it.forEach { roomDetails ->
                 rooms.add(roomDetails)
             }
-            myRoomAdapter.notifyDataSetChanged()
+            roomsRoomAdapter.notifyDataSetChanged()
             setUIVisibility(false)
         }
     }

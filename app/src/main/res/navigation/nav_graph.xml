@@ -26,29 +26,40 @@
         android:id="@+id/homeFragment"
         android:name="com.example.virtualclasses.ui.fragments.HomeFragment"
         android:label="fragment_home"
-        tools:layout="@layout/fragment_home" />
-    <fragment
-        android:id="@+id/addRoomFragment"
-        android:name="com.example.virtualclasses.ui.fragments.AddRoomFragment"
-        android:label="fragment_add_room"
-        tools:layout="@layout/fragment_add_room" />
-    <fragment
-        android:id="@+id/subscribeNewRoomFragment"
-        android:name="com.example.virtualclasses.ui.fragments.SubscribeNewRoomFragment"
-        android:label="fragment_subscribe_new_room"
-        tools:layout="@layout/fragment_subscribe_new_room" />
-    <fragment
-        android:id="@+id/weekDaysFragment"
-        android:name="com.example.virtualclasses.ui.fragments.WeekDaysFragment"
-        android:label="fragment_week_days"
-        tools:layout="@layout/fragment_week_days" >
+        tools:layout="@layout/fragment_home" >
         <action
-            android:id="@+id/action_weekDaysFragment_to_editPerDayScheduleFragment"
-            app:destination="@id/editPerDayScheduleFragment" />
+            android:id="@+id/action_homeFragment_to_editMyRoomSchedule"
+            app:destination="@id/editMyRoomSchedule" />
+        <action
+            android:id="@+id/action_homeFragment_to_viewSubscribedRoomSchedule"
+            app:destination="@id/viewSubscribedRoomSchedule" />
+    </fragment>
+    <dialog
+        android:id="@+id/myRoomBottomSheetFragment"
+        android:name="com.example.virtualclasses.ui.fragments.MyRoomBottomSheetFragment"
+        android:label="fragment_my_room_bottom_sheet"
+        tools:layout="@layout/fragment_my_room_bottom_sheet" />
+    <dialog
+        android:id="@+id/subscribedRoomBottomSheetFragment"
+        android:name="com.example.virtualclasses.ui.fragments.SubscribedRoomBottomSheetFragment"
+        android:label="fragment_subscribed_room_bottom_sheet"
+        tools:layout="@layout/fragment_subscribed_room_bottom_sheet" />
+    <fragment
+        android:id="@+id/editMyRoomSchedule"
+        android:name="com.example.virtualclasses.ui.fragments.EditMyRoomSchedule"
+        android:label="fragment_edit_my_room_schedule"
+        tools:layout="@layout/fragment_edit_my_room_schedule" >
+        <argument
+            android:name="room"
+            app:argType="com.example.virtualclasses.model.Room" />
     </fragment>
     <fragment
-        android:id="@+id/editPerDayScheduleFragment"
-        android:name="com.example.virtualclasses.ui.fragments.EditPerDayScheduleFragment"
-        android:label="fragment_edit_per_day_schedule"
-        tools:layout="@layout/fragment_edit_per_day_schedule" />
+        android:id="@+id/viewSubscribedRoomSchedule"
+        android:name="com.example.virtualclasses.ui.fragments.ViewSubscribedRoomSchedule"
+        android:label="fragment_view_subscribed_room_schedule"
+        tools:layout="@layout/fragment_view_subscribed_room_schedule" >
+        <argument
+            android:name="room"
+            app:argType="com.example.virtualclasses.model.Room" />
+    </fragment>
 </navigation>

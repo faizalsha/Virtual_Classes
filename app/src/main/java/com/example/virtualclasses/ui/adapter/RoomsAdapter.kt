@@ -9,7 +9,7 @@ import com.example.virtualclasses.R
 import com.example.virtualclasses.model.Room
 import kotlinx.android.synthetic.main.item_room.view.*
 
-class MyAdapter(val data: ArrayList<Room>, val context: Context, val listener: (Room) -> Unit): RecyclerView.Adapter<MyAdapter.MyAdapterViewHolder>() {
+class RoomsAdapter(private val data: ArrayList<Room>, val context: Context, private val listener: (Room) -> Unit): RecyclerView.Adapter<RoomsAdapter.MyAdapterViewHolder>() {
     class MyAdapterViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun bind(item: Room, listener: (Room) -> Unit){
             itemView.roomTitle.text = item.roomTitle
