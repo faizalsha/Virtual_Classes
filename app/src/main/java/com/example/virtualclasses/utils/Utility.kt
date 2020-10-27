@@ -3,14 +3,33 @@ package com.example.virtualclasses.utils
 import android.app.TimePickerDialog
 import android.content.Context
 import android.media.midi.MidiDevice
-import com.example.virtualclasses.model.DaySchedule
-import com.example.virtualclasses.model.MidDay
-import com.example.virtualclasses.model.Schedule
-import com.example.virtualclasses.model.ScheduleTime
+import com.example.virtualclasses.model.*
 import java.util.*
 import kotlin.math.min
 
 object Utility {
+    val weekDayToIndex = mapOf<WeekDay, Int>(
+        WeekDay.SUNDAY to 0,
+        WeekDay.MONDAY to 1,
+        WeekDay.TUESDAY to 2,
+        WeekDay.WEDNESDAY to 3,
+        WeekDay.THURSDAY to 4,
+        WeekDay.FRIDAY to 5,
+        WeekDay.SATURDAY to 6
+    )
+    val indexToWeekDay = mapOf(
+        0 to WeekDay.SUNDAY,
+        1 to WeekDay.MONDAY,
+        2 to WeekDay.TUESDAY,
+        3 to WeekDay.WEDNESDAY,
+        4 to WeekDay.THURSDAY,
+        5 to WeekDay.FRIDAY,
+        6 to WeekDay.SATURDAY
+    )
+    fun getCurrentDayOfWeekIndex(): Int{
+        //1 based indexing Calendar.SUNDAY -> 1, Calendar.MONDAY -> 2
+        return Calendar.getInstance().get(Calendar.DAY_OF_WEEK)
+    }
     fun selectTime(context: Context, onTimeSelected: (ScheduleTime)->Unit){
         val calendar = Calendar.getInstance()
         val hour = calendar.get(Calendar.HOUR)
