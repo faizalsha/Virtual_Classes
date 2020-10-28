@@ -7,12 +7,13 @@ import android.view.ViewGroup
 import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.virtualclasses.R
+import com.example.virtualclasses.model.DaySchedule
 import com.example.virtualclasses.model.DefaultDaySchedule
 import com.example.virtualclasses.model.Schedule
 import com.example.virtualclasses.ui.fragments.ScheduleDialogFragment
 import kotlinx.android.synthetic.main.item_schedule.view.*
 
-class PerDayScheduleAdapter(private val defaultDaySchedule: DefaultDaySchedule, val context: Context, private val fragmentManager: FragmentManager,): RecyclerView.Adapter<PerDayScheduleAdapter.PerDayScheduleHolder>() {
+class PerDayScheduleAdapter(private val defaultDaySchedule: DaySchedule, val context: Context, private val fragmentManager: FragmentManager): RecyclerView.Adapter<PerDayScheduleAdapter.PerDayScheduleHolder>() {
     class PerDayScheduleHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun bind(
             perDayScheduleAdapter: PerDayScheduleAdapter,

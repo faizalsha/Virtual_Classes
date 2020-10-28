@@ -2,6 +2,7 @@ package com.example.virtualclasses.firebase
 
 import com.example.virtualclasses.local.Constants
 import com.example.virtualclasses.model.*
+import com.example.virtualclasses.utils.Utility
 import com.google.firebase.auth.AuthResult
 import com.google.firebase.firestore.FirebaseFirestore
 import java.lang.Exception
@@ -131,16 +132,17 @@ object FireStore {
     }
     fun getDefaultDaySchedule(dayOfWeekIndex: Int, roomId: String, listener: (DefaultDaySchedule?) -> Unit){
         val userId = FireAuth.getCurrentUser()?.uid ?: return
-        var dayOfWeek = WeekDay.MONDAY.toString()
-        when(dayOfWeekIndex){
-            0 -> dayOfWeek = WeekDay.MONDAY.toString()
-            1 -> dayOfWeek = WeekDay.TUESDAY.toString()
-            2 -> dayOfWeek = WeekDay.WEDNESDAY.toString()
-            3 -> dayOfWeek = WeekDay.THURSDAY.toString()
-            4 -> dayOfWeek = WeekDay.FRIDAY.toString()
-            5 -> dayOfWeek = WeekDay.SATURDAY.toString()
-            6 -> dayOfWeek = WeekDay.SUNDAY.toString()
-        }
+        if(!Utility.indexToWeekDay.containsKey(dayOfWeekIndex)) return
+        val dayOfWeek = Utility.indexToWeekDay[dayOfWeekIndex].toString()
+//        when(dayOfWeekIndex){
+//            0 -> dayOfWeek = WeekDay.MONDAY.toString()
+//            1 -> dayOfWeek = WeekDay.TUESDAY.toString()
+//            2 -> dayOfWeek = WeekDay.WEDNESDAY.toString()
+//            3 -> dayOfWeek = WeekDay.THURSDAY.toString()
+//            4 -> dayOfWeek = WeekDay.FRIDAY.toString()
+//            5 -> dayOfWeek = WeekDay.SATURDAY.toString()
+//            6 -> dayOfWeek = WeekDay.SUNDAY.toString()
+//        }
         mFireStoreRef.collection(Constants.USERS)
             .document(userId)
             .collection(Constants.ROOMS)
