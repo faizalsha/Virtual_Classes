@@ -11,4 +11,9 @@
         <item>Select Date</item>
     </string-array>
 
+    <string-array name="default_updated">
+        <item>Updated</item>
+        <item>Default</item>
+    </string-array>
+
 </resources>

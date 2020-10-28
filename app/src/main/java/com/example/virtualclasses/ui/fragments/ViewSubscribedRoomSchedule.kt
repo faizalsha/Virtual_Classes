@@ -40,7 +40,7 @@ class ViewSubscribedRoomSchedule : Fragment(), AdapterView.OnItemSelectedListene
 
             }
         }
-        daySpinner.setSelection(2)
+        daySpinner.setSelection(dayOfWeek)
         daySpinner.onItemSelectedListener = this
     }
 

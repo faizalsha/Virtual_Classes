@@ -5,41 +5,23 @@
     android:layout_height="match_parent"
     tools:context=".ui.fragments.ViewSubscribedRoomSchedule">
 
-    <LinearLayout
-        android:id="@+id/topView"
+    <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginTop="8dp">
-        <TextView
-            android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Schedule"
-            android:layout_weight="1"
-            android:fontFamily="@font/roboto"
-            android:textSize="20sp"/>
-        <Spinner
-            android:id="@+id/daySpinner"
-            android:layout_width="wrap_content"
-            android:layout_height="24dp" />
-    </LinearLayout>
-    <View
-        android:id="@+id/scheduleView"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_below="@id/topView"
-        android:background="?android:attr/dividerVertical"/>
+            android:orientation="horizontal">
+            <Spinner
+                android:id="@+id/daySpinner"
+                android:layout_width="wrap_content"
+                android:layout_height="36dp"
+                android:layout_weight="1"/>
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/scheduleRecyclerView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/scheduleView"
-        android:layout_marginTop="8dp"/>
-    <ProgressBar
-        android:id="@+id/scheduleProgressBar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"/>
+        android:layout_height="match_parent"/>
 
 </RelativeLayout>

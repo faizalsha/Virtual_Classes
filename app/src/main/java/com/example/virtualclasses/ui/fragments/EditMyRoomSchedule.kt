@@ -12,7 +12,9 @@ import android.widget.Toast
 import com.example.virtualclasses.R
 import com.example.virtualclasses.utils.Utility
 import io.grpc.okhttp.internal.Util
+import kotlinx.android.synthetic.main.fragment_edit_my_room_schedule.*
 import kotlinx.android.synthetic.main.fragment_view_subscribed_room_schedule.*
+import kotlinx.android.synthetic.main.fragment_view_subscribed_room_schedule.daySpinner
 import kotlinx.android.synthetic.main.item_day.*
 import java.util.*
 
@@ -40,6 +42,14 @@ class EditMyRoomSchedule : Fragment(), AdapterView.OnItemSelectedListener {
             ).also { adapter ->
                 adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
                 daySpinner.adapter = adapter
+            }
+            ArrayAdapter.createFromResource(
+                requireContext(),
+                R.array.default_updated,
+                android.R.layout.simple_spinner_item
+            ).also { adapter ->
+                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+                default_updated.adapter = adapter
             }
         }
         daySpinner.setSelection(dayOfWeek)
