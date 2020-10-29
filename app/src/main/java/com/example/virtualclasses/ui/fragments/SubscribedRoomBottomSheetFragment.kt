@@ -40,7 +40,7 @@ class SubscribedRoomBottomSheetFragment : BottomSheetDialogFragment() {
         if(context == null) return
         roomsAdapter = RoomsAdapter(rooms, requireContext()){
             val action =
-                HomeFragmentDirections.actionHomeFragmentToViewSubscribedRoomSchedule(it)
+                HomeFragmentDirections.actionHomeFragmentToViewSubscribedRoomSchedule()
             findNavController().navigate(action)
             dismiss()
 

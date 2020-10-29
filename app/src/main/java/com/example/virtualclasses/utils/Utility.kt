@@ -28,7 +28,7 @@ object Utility {
     )
     fun getCurrentDayOfWeekIndex(): Int{
         //1 based indexing Calendar.SUNDAY -> 1, Calendar.MONDAY -> 2
-        return Calendar.getInstance().get(Calendar.DAY_OF_WEEK)
+        return Calendar.getInstance().get(Calendar.DAY_OF_WEEK) - 1
     }
     fun selectTime(context: Context, onTimeSelected: (ScheduleTime)->Unit){
         val calendar = Calendar.getInstance()

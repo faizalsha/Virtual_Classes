@@ -11,6 +11,7 @@ import com.example.virtualclasses.firebase.FireAuth
 import com.example.virtualclasses.firebase.FireStore
 import com.example.virtualclasses.model.Room
 import com.example.virtualclasses.ui.adapter.RoomsAdapter
+import com.example.virtualclasses.utils.Communicator
 import com.example.virtualclasses.utils.Utility
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import kotlinx.android.synthetic.main.fragment_my_room_bottom_sheet.*
@@ -36,8 +37,13 @@ class MyRoomBottomSheetFragment : BottomSheetDialogFragment() {
     private fun setupRecyclerView(){
         if(context == null) return
         roomsRoomAdapter = RoomsAdapter(rooms, requireContext()){
+            /*sending data to communicator*/
+            Communicator.room = it
+            Communicator.dayOfWeekIndex = Utility.getCurrentDayOfWeekIndex()
+            Communicator.default_updated = 0
+            /*end*/
             val action =
-                HomeFragmentDirections.actionHomeFragmentToEditMyRoomSchedule(it, Utility.getCurrentDayOfWeekIndex(), 1)
+                HomeFragmentDirections.actionHomeFragmentToEditMyRoomSchedule()
             findNavController().navigate(action)
             dismiss()
         }

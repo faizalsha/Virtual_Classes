@@ -6,20 +6,18 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.navigation.fragment.navArgs
 import com.example.virtualclasses.R
+import com.example.virtualclasses.firebase.FireStore
 import com.example.virtualclasses.local.Constants
-import com.example.virtualclasses.model.DaySchedule
-import com.example.virtualclasses.model.MidDay
-import com.example.virtualclasses.model.Schedule
-import com.example.virtualclasses.model.ScheduleTime
+import com.example.virtualclasses.model.*
+import com.example.virtualclasses.utils.Communicator
 import com.example.virtualclasses.utils.Utility
 import kotlinx.android.synthetic.main.fragment_schedule_form.*
 import java.util.*
 
 class ScheduleFormFragment : Fragment() {
-    private val args: ScheduleFormFragmentArgs by navArgs()
-    lateinit var daySchedule: DaySchedule
+//    private val args: ScheduleFormFragmentArgs by navArgs()
+//    lateinit var daySchedule: DaySchedule
     lateinit var to: ScheduleTime
     lateinit var from: ScheduleTime
     override fun onCreateView(
@@ -32,13 +30,13 @@ class ScheduleFormFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        daySchedule = args.daySchedule
         val calendar = Calendar.getInstance()
         from = ScheduleTime(calendar.get(Calendar.HOUR).toString(), calendar.get(Calendar.MINUTE).toString(), MidDay.AM)
         to = ScheduleTime(calendar.get(Calendar.HOUR).toString(), calendar.get(Calendar.MINUTE).toString(), MidDay.AM)
         fromTextView.text = from.toString()
         toTextView.text = to.toString()
         setupListener()
+        dayName.text = Utility.indexToWeekDay[Communicator.dayOfWeekIndex].toString()
     }
     private fun setupListener(){
         insertSchedule.setOnClickListener {
@@ -54,8 +52,32 @@ class ScheduleFormFragment : Fragment() {
                 from,
                 to
             )
-            if(Utility.validateSchedule(daySchedule, schedule)){
-                daySchedule.schedules.add(schedule)
+            if(Utility.validateSchedule(Communicator.daySchedule!!, schedule)){
+                Communicator.daySchedule!!.schedules.add(schedule)
+                if(Communicator.default_updated == 0){
+                    //updated schedule selected
+                    TODO()
+                }else{
+                    //default schedule selected
+                    val dds =
+                        DefaultDaySchedule(
+                            Communicator.daySchedule!!.schedules,
+                            Communicator.room!!.roomId,
+                            Communicator.room!!.ownerId,
+                            Utility.indexToWeekDay[Communicator.dayOfWeekIndex]!!
+                        )
+                    FireStore
+                        .saveDefaultDaySchedule(
+                            Communicator.dayOfWeekIndex!!,
+                            dds,
+                            Communicator.room!!.roomId){
+                                if(it){
+                                    Toast.makeText(context, "saved successfully", Toast.LENGTH_LONG).show()
+                                }else{
+                                    Toast.makeText(context, "couldn't save successfully", Toast.LENGTH_LONG).show()
+                                }
+                            }
+                }
                 Toast.makeText(context, "done", Toast.LENGTH_LONG).show()
                 activity?.onBackPressed()
             }else{
