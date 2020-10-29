@@ -37,6 +37,8 @@ class ScheduleFormFragment : Fragment() {
         toTextView.text = to.toString()
         setupListener()
         dayName.text = Utility.indexToWeekDay[Communicator.dayOfWeekIndex].toString()
+        if(Communicator.default_updated == 1)
+            dayName.append("(Default)")
     }
     private fun setupListener(){
         insertSchedule.setOnClickListener {
@@ -56,7 +58,7 @@ class ScheduleFormFragment : Fragment() {
                 Communicator.daySchedule!!.schedules.add(schedule)
                 if(Communicator.default_updated == 0) {
                     //updated schedule selected
-                    val date = Date(200, 10, 10)
+                    val date = Communicator.date!!
                     val updatedDaySchedule =
                         UpdatedDaySchedule(
                             Communicator.daySchedule!!.schedules,
@@ -69,7 +71,7 @@ class ScheduleFormFragment : Fragment() {
                         Communicator.room!!.roomId
                     ) {
                         if (it)
-                            Toast.makeText(context, "Saved successfully", Toast.LENGTH_LONG).show()
+                            Toast.makeText(context, "Saved updated schedule successfully", Toast.LENGTH_LONG).show()
                         else
                             Toast.makeText(
                                 context,
@@ -92,7 +94,7 @@ class ScheduleFormFragment : Fragment() {
                             dds,
                             Communicator.room!!.roomId){
                                 if(it){
-                                    Toast.makeText(context, "saved successfully", Toast.LENGTH_LONG).show()
+                                    Toast.makeText(context, "saved default schedule successfully", Toast.LENGTH_LONG).show()
                                 }else{
                                     Toast.makeText(context, "couldn't save successfully", Toast.LENGTH_LONG).show()
                                 }

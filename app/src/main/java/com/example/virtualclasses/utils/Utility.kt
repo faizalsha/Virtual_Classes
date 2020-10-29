@@ -88,4 +88,9 @@ object Utility {
         WeekDay.SATURDAY to Calendar.SATURDAY,
         WeekDay.SUNDAY to Calendar.SUNDAY
     )
+
+    fun getCurrentDate(): Date{
+        val date = Date()
+        return Date(date.year + 1900, date.month, date.date)
+    }
 }

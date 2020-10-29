@@ -1,13 +1,13 @@
 package com.example.virtualclasses.ui.fragments
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Toast
+import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.virtualclasses.R
@@ -22,6 +22,7 @@ import java.util.*
 
 class EditMyRoomSchedule : Fragment() {
     lateinit var perDayScheduleAdapter: PerDayScheduleAdapter
+    var isLoading = false
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -35,7 +36,6 @@ class EditMyRoomSchedule : Fragment() {
         Communicator.daySchedule = DefaultDaySchedule(mutableListOf(), Communicator.room!!.roomId, Communicator.room!!.ownerId, Utility.indexToWeekDay[Communicator.dayOfWeekIndex]!!)
         setupRecyclerview()
         setupSpinner(Communicator.dayOfWeekIndex!!, Communicator.default_updated!!)
-//        getDataFromFirebase()
         setupFAB()
     }
     private fun setupRecyclerview(){
@@ -80,8 +80,12 @@ class EditMyRoomSchedule : Fragment() {
                 // parent.getItemAtPosition(pos)
                 Toast.makeText(context, "position: $pos selected", Toast.LENGTH_SHORT).show()
                 Communicator.dayOfWeekIndex = pos
+                Communicator.date = Utility.getNextWeekDay(
+                    Utility.getCurrentDate(),
+                    Utility.indexToWeekDay[Communicator.dayOfWeekIndex]!!
+                )
                 //check what to show default or updated
-                getDefaultDaySchedule()
+                showCorrectSchedule()
             }
 
             override fun onNothingSelected(parent: AdapterView<*>) {
@@ -96,15 +100,7 @@ class EditMyRoomSchedule : Fragment() {
                 // parent.getItemAtPosition(pos)
                 Toast.makeText(context, "position: $pos selected", Toast.LENGTH_SHORT).show()
                 Communicator.default_updated = pos
-                //todo: trigger firestore
-                if(pos == 1){
-                    //showing default schedule
-                    getDefaultDaySchedule()
-                }else{
-                    // TODO: 10/29/2020 get proper date to be searched
-                    val date = Date(200, 10, 10)
-                    getUpdatedDaySchedule(date)
-                }
+                showCorrectSchedule()
             }
 
             override fun onNothingSelected(parent: AdapterView<*>) {
@@ -116,6 +112,7 @@ class EditMyRoomSchedule : Fragment() {
 
     private fun getDefaultDaySchedule(){
         FireStore.getDefaultDaySchedule(Communicator.dayOfWeekIndex!!, Communicator.room!!.roomId){
+            isLoading = false
             if(it == null){
                 Toast.makeText(context, "Error occurred", Toast.LENGTH_SHORT).show()
                 return@getDefaultDaySchedule
@@ -127,6 +124,7 @@ class EditMyRoomSchedule : Fragment() {
     }
     private fun getUpdatedDaySchedule(date: Date){
         FireStore.getUpdatedDaySchedule(date, Communicator.dayOfWeekIndex!!, Communicator.room!!.roomId){
+            isLoading = false
             if(it == null){
                 Toast.makeText(context, "Error occurred", Toast.LENGTH_SHORT).show()
                 return@getUpdatedDaySchedule
@@ -137,11 +135,28 @@ class EditMyRoomSchedule : Fragment() {
         }
     }
 
-    private fun setupFAB(){
+    private fun setupFAB() {
         fab.setOnClickListener {
             val action =
                 EditMyRoomScheduleDirections.actionEditMyRoomScheduleToScheduleFormFragment()
             findNavController().navigate(action)
+        }
+    }
+
+    private fun showCorrectSchedule() {
+        if (!isLoading) {
+            if (Communicator.default_updated == 0) {
+                //update is selected
+                val dayIndex = Communicator.dayOfWeekIndex!!
+                val weekDay = Utility.indexToWeekDay[dayIndex]
+                val now = Utility.getCurrentDate()
+                val date = Utility.getNextWeekDay(now, weekDay!!)
+                getUpdatedDaySchedule(date)
+            } else {
+                //default is selected
+                getDefaultDaySchedule()
+            }
+            isLoading = true
         }
     }
 }

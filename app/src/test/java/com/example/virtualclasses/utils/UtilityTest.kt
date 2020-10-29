@@ -15,4 +15,10 @@ class UtilityTest {
         val result = Utility.getNextWeekDay(date, weekDay)
         println("date: ${result.date} month: ${result.month} day: ${result.day} year: ${date.year}")
     }
+
+    @Test
+    fun getCurrentDate(){
+        val date = Date()
+        println("date: ${date.date} month: ${date.month} year: ${date.year + 1900}")
+    }
 }
