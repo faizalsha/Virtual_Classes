@@ -52,6 +52,15 @@
         <argument
             android:name="room"
             app:argType="com.example.virtualclasses.model.Room" />
+        <action
+            android:id="@+id/action_editMyRoomSchedule_to_scheduleFormFragment"
+            app:destination="@id/scheduleFormFragment" />
+        <argument
+            android:name="defaultOrUpdated"
+            app:argType="integer" />
+        <argument
+            android:name="weekOfDayIndex"
+            app:argType="integer" />
     </fragment>
     <fragment
         android:id="@+id/viewSubscribedRoomSchedule"
@@ -61,5 +70,14 @@
         <argument
             android:name="room"
             app:argType="com.example.virtualclasses.model.Room" />
+    </fragment>
+    <fragment
+        android:id="@+id/scheduleFormFragment"
+        android:name="com.example.virtualclasses.ui.fragments.ScheduleFormFragment"
+        android:label="fragment_schedule_form"
+        tools:layout="@layout/fragment_schedule_form" >
+        <argument
+            android:name="daySchedule"
+            app:argType="com.example.virtualclasses.model.DaySchedule" />
     </fragment>
 </navigation>

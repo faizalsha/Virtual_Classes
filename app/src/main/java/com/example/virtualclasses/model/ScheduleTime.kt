@@ -28,5 +28,9 @@ class ScheduleTime(var hour: String, var minute: String, var midday: MidDay) {
         if(this.hour == other.hour && this.minute == other.minute && this.midday == this.midday) return true
         return false
     }
+
+    override fun toString(): String {
+        return "$hour:$minute $midday"
+    }
     constructor():this("00", "00", MidDay.AM)
 }

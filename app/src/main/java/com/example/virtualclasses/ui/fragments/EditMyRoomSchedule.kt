@@ -10,6 +10,7 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.LinearLayout
 import android.widget.Toast
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.virtualclasses.R
@@ -43,9 +44,12 @@ class EditMyRoomSchedule : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         daySchedule = DefaultDaySchedule(mutableListOf(), args.room.roomId, args.room.ownerId, WeekDay.SUNDAY)
+        val dayOfWeekIndex = args.weekOfDayIndex
+        val defaultOrUpdated = args.defaultOrUpdated
         setupRecyclerview()
-        setupSpinner(Utility.getCurrentDayOfWeekIndex() - 1)
+        setupSpinner(dayOfWeekIndex, defaultOrUpdated)
         getDataFromFirebase()
+        setupFAB()
     }
     private fun setupRecyclerview(){
         if(context == null) return
@@ -55,7 +59,7 @@ class EditMyRoomSchedule : Fragment() {
             adapter = perDayScheduleAdapter
         }
     }
-    private fun setupSpinner(dayOfWeek: Int) {
+    private fun setupSpinner(dayOfWeek: Int, defaultOrUpdated: Int) {
         dayIndex = dayOfWeek
         defaultIndex = 0
         if(context != null) {
@@ -77,7 +81,7 @@ class EditMyRoomSchedule : Fragment() {
             }
         }
         daySpinner.setSelection(dayOfWeek)
-        default_updated.setSelection(1)
+        default_updated.setSelection(defaultOrUpdated)
         setSpinnerCallbacks()
     }
 
@@ -129,7 +133,9 @@ class EditMyRoomSchedule : Fragment() {
 
     private fun setupFAB(){
         fab.setOnClickListener {
-
+            val action =
+                EditMyRoomScheduleDirections.actionEditMyRoomScheduleToScheduleFormFragment(daySchedule)
+            findNavController().navigate(action)
         }
     }
 }

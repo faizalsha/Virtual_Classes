@@ -11,6 +11,7 @@ import com.example.virtualclasses.firebase.FireAuth
 import com.example.virtualclasses.firebase.FireStore
 import com.example.virtualclasses.model.Room
 import com.example.virtualclasses.ui.adapter.RoomsAdapter
+import com.example.virtualclasses.utils.Utility
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import kotlinx.android.synthetic.main.fragment_my_room_bottom_sheet.*
 import kotlinx.android.synthetic.main.fragment_my_room_bottom_sheet.backButton
@@ -36,7 +37,7 @@ class MyRoomBottomSheetFragment : BottomSheetDialogFragment() {
         if(context == null) return
         roomsRoomAdapter = RoomsAdapter(rooms, requireContext()){
             val action =
-                HomeFragmentDirections.actionHomeFragmentToEditMyRoomSchedule(it)
+                HomeFragmentDirections.actionHomeFragmentToEditMyRoomSchedule(it, Utility.getCurrentDayOfWeekIndex(), 1)
             findNavController().navigate(action)
             dismiss()
         }

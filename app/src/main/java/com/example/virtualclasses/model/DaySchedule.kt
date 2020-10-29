@@ -1,6 +1,8 @@
 package com.example.virtualclasses.model
 
-interface DaySchedule {
+import java.io.Serializable
+
+interface DaySchedule: Serializable {
     var schedules: MutableList<Schedule>
     val roomId: String
     val ownerId: String
