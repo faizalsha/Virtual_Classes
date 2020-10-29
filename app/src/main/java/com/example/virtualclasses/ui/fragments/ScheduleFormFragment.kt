@@ -1,11 +1,11 @@
 package com.example.virtualclasses.ui.fragments
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.fragment.app.Fragment
 import com.example.virtualclasses.R
 import com.example.virtualclasses.firebase.FireStore
 import com.example.virtualclasses.local.Constants
@@ -13,6 +13,7 @@ import com.example.virtualclasses.model.*
 import com.example.virtualclasses.utils.Communicator
 import com.example.virtualclasses.utils.Utility
 import kotlinx.android.synthetic.main.fragment_schedule_form.*
+import java.sql.Date
 import java.util.*
 
 class ScheduleFormFragment : Fragment() {
@@ -54,9 +55,29 @@ class ScheduleFormFragment : Fragment() {
             )
             if(Utility.validateSchedule(Communicator.daySchedule!!, schedule)){
                 Communicator.daySchedule!!.schedules.add(schedule)
-                if(Communicator.default_updated == 0){
+                if(Communicator.default_updated == 0) {
                     //updated schedule selected
-                    TODO()
+                    val date = Date(200, 10, 10)
+                    val updatedDaySchedule =
+                        UpdatedDaySchedule(
+                            Communicator.daySchedule!!.schedules,
+                            Communicator.room!!.roomId,
+                            Communicator.room!!.ownerId,
+                            date
+                        )
+                    FireStore.saveUpdatedDaySchedule(
+                        updatedDaySchedule,
+                        Communicator.room!!.roomId
+                    ) {
+                        if (it)
+                            Toast.makeText(context, "Saved successfully", Toast.LENGTH_LONG).show()
+                        else
+                            Toast.makeText(
+                                context,
+                                "updatedSchedule couldn't saved successfully",
+                                Toast.LENGTH_LONG
+                            ).show()
+                    }
                 }else{
                     //default schedule selected
                     val dds =
@@ -79,7 +100,7 @@ class ScheduleFormFragment : Fragment() {
                             }
                 }
                 Toast.makeText(context, "done", Toast.LENGTH_LONG).show()
-                activity?.onBackPressed()
+//                activity?.onBackPressed()
             }else{
                 Toast.makeText(context, "conflicting", Toast.LENGTH_LONG).show()
             }

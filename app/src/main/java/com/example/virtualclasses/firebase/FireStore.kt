@@ -1,12 +1,16 @@
 package com.example.virtualclasses.firebase
 
+import android.util.Log
+import android.widget.Toast
 import com.example.virtualclasses.local.Constants
 import com.example.virtualclasses.model.*
 import com.example.virtualclasses.utils.Utility
 import com.google.firebase.auth.AuthResult
 import com.google.firebase.firestore.FirebaseFirestore
 import java.lang.Exception
-
+import java.sql.Date
+import java.util.*
+const val TAG = "FIRESTORE"
 object FireStore {
 
     private val mFireStoreRef: FirebaseFirestore by lazy { FirebaseFirestore.getInstance() }
@@ -158,6 +162,43 @@ object FireStore {
                 }
             }.addOnFailureListener {
                 listener(null)
+            }
+    }
+
+    fun getUpdatedDaySchedule(date: Date, dayOfWeekIndex: Int, roomId: String, listener: (DaySchedule) -> Unit){
+        val userId = FireAuth.getCurrentUser()?.uid ?: return
+        if(!Utility.indexToWeekDay.containsKey(dayOfWeekIndex)) return
+        val query = mFireStoreRef
+            .collection(Constants.USERS)
+            .document(userId)
+            .collection(Constants.ROOMS)
+            .document(roomId)
+            .collection(Constants.UPDATED)
+            .whereEqualTo(Constants.DATE, date)
+        query.get().addOnSuccessListener {
+            if(it.isEmpty){
+                Log.d(TAG, "getUpdatedDaySchedule: EMPTY QUERY")
+            }else{
+                Log.d(TAG, "getUpdatedDaySchedule: EMPTY NOT EMPTY")
+            }
+        }.addOnFailureListener {
+            Log.d(TAG, "getUpdatedDaySchedule: FAILURE + EXCEPTIO: ${it.message}")
+        }
+    }
+
+    fun saveUpdatedDaySchedule(updatedDaySchedule: UpdatedDaySchedule, roomId: String, listener: (Boolean) -> Unit){
+        //todo: if current user is null send user to login screen and clear shared preferences
+        val userId = FireAuth.getCurrentUser()!!.uid
+        mFireStoreRef.collection(Constants.USERS)
+            .document(userId)
+            .collection(Constants.ROOMS)
+            .document(roomId)
+            .collection(Constants.UPDATED)
+            .document()
+            .set(updatedDaySchedule).addOnSuccessListener {
+                listener(true)
+            }.addOnFailureListener {
+                listener(false)
             }
     }
 }
