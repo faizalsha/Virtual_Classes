@@ -6,6 +6,7 @@
     tools:context=".ui.fragments.EditMyRoomSchedule">
 
     <androidx.cardview.widget.CardView
+        android:id="@+id/spinnerCardView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <LinearLayout
@@ -33,7 +34,8 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/scheduleRecyclerview"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent"
+        android:layout_below="@id/spinnerCardView"/>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab"
