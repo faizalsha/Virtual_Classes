@@ -67,7 +67,7 @@ object Utility {
     }
 
     fun getNextWeekDay(date: Date, day: WeekDay): Date {
-        val date1 = GregorianCalendar(2020, date.month - 1, 29)
+        val date1 = GregorianCalendar(date.year, date.month - 1, date.date)
 
         while (date1[Calendar.DAY_OF_WEEK] != weekDayToCalenderDay[day]) {
             date1.add(Calendar.DATE, 1)
@@ -91,6 +91,6 @@ object Utility {
 
     fun getCurrentDate(): Date{
         val date = Date()
-        return Date(date.year + 1900, date.month, date.date)
+        return Date(date.year, date.month, date.date)
     }
 }
