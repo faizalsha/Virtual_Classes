@@ -1,31 +1,23 @@
 package com.example.virtualclasses.ui.fragments
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
-import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.navigation.fragment.findNavController
-import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.virtualclasses.R
 import com.example.virtualclasses.firebase.FireStore
-import com.example.virtualclasses.model.DaySchedule
 import com.example.virtualclasses.model.DefaultDaySchedule
-import com.example.virtualclasses.model.WeekDay
 import com.example.virtualclasses.ui.adapter.PerDayScheduleAdapter
 import com.example.virtualclasses.utils.Communicator
 import com.example.virtualclasses.utils.Utility
-import io.grpc.okhttp.internal.Util
 import kotlinx.android.synthetic.main.fragment_edit_my_room_schedule.*
-import kotlinx.android.synthetic.main.fragment_view_subscribed_room_schedule.*
 import kotlinx.android.synthetic.main.fragment_view_subscribed_room_schedule.daySpinner
-import kotlinx.android.synthetic.main.item_day.*
 import java.util.*
 
 class EditMyRoomSchedule : Fragment() {
@@ -89,7 +81,7 @@ class EditMyRoomSchedule : Fragment() {
                 Toast.makeText(context, "position: $pos selected", Toast.LENGTH_SHORT).show()
                 Communicator.dayOfWeekIndex = pos
                 //check what to show default or updated
-                getDataFromFirebase()
+                getDefaultDaySchedule()
             }
 
             override fun onNothingSelected(parent: AdapterView<*>) {
@@ -107,7 +99,11 @@ class EditMyRoomSchedule : Fragment() {
                 //todo: trigger firestore
                 if(pos == 1){
                     //showing default schedule
-                    getDataFromFirebase()
+                    getDefaultDaySchedule()
+                }else{
+                    // TODO: 10/29/2020 get proper date to be searched
+                    val date = Date(200, 10, 10)
+                    getUpdatedDaySchedule(date)
                 }
             }
 
@@ -118,11 +114,22 @@ class EditMyRoomSchedule : Fragment() {
         }
     }
 
-    private fun getDataFromFirebase(){
+    private fun getDefaultDaySchedule(){
         FireStore.getDefaultDaySchedule(Communicator.dayOfWeekIndex!!, Communicator.room!!.roomId){
             if(it == null){
                 Toast.makeText(context, "Error occurred", Toast.LENGTH_SHORT).show()
                 return@getDefaultDaySchedule
+            }
+            Communicator.daySchedule!!.schedules = it.schedules
+            perDayScheduleAdapter.notifyDataSetChanged()
+            Toast.makeText(context, "updated", Toast.LENGTH_SHORT).show()
+        }
+    }
+    private fun getUpdatedDaySchedule(date: Date){
+        FireStore.getUpdatedDaySchedule(date, Communicator.dayOfWeekIndex!!, Communicator.room!!.roomId){
+            if(it == null){
+                Toast.makeText(context, "Error occurred", Toast.LENGTH_SHORT).show()
+                return@getUpdatedDaySchedule
             }
             Communicator.daySchedule!!.schedules = it.schedules
             perDayScheduleAdapter.notifyDataSetChanged()

@@ -1,6 +1,6 @@
 package com.example.virtualclasses.model
 
-import java.sql.Date
+import java.util.*
 
 
 class UpdatedDaySchedule(

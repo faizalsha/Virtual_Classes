@@ -13,7 +13,6 @@ import com.example.virtualclasses.model.*
 import com.example.virtualclasses.utils.Communicator
 import com.example.virtualclasses.utils.Utility
 import kotlinx.android.synthetic.main.fragment_schedule_form.*
-import java.sql.Date
 import java.util.*
 
 class ScheduleFormFragment : Fragment() {

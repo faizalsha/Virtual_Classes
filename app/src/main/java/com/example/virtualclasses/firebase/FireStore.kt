@@ -1,15 +1,13 @@
 package com.example.virtualclasses.firebase
 
 import android.util.Log
-import android.widget.Toast
 import com.example.virtualclasses.local.Constants
 import com.example.virtualclasses.model.*
 import com.example.virtualclasses.utils.Utility
 import com.google.firebase.auth.AuthResult
 import com.google.firebase.firestore.FirebaseFirestore
-import java.lang.Exception
-import java.sql.Date
 import java.util.*
+
 const val TAG = "FIRESTORE"
 object FireStore {
 
@@ -157,7 +155,7 @@ object FireStore {
                 try {
                     val daySchedule = it.toObject(DefaultDaySchedule::class.java)
                     listener(daySchedule)
-                }catch (e: Exception){
+                } catch (e: Exception) {
                     listener(null)
                 }
             }.addOnFailureListener {
@@ -165,24 +163,32 @@ object FireStore {
             }
     }
 
-    fun getUpdatedDaySchedule(date: Date, dayOfWeekIndex: Int, roomId: String, listener: (DaySchedule) -> Unit){
+    fun getUpdatedDaySchedule(
+        date: Date,
+        dayOfWeekIndex: Int,
+        roomId: String,
+        listener: (DaySchedule?) -> Unit
+    ) {
         val userId = FireAuth.getCurrentUser()?.uid ?: return
-        if(!Utility.indexToWeekDay.containsKey(dayOfWeekIndex)) return
+        if (!Utility.indexToWeekDay.containsKey(dayOfWeekIndex)) return
         val query = mFireStoreRef
             .collection(Constants.USERS)
             .document(userId)
             .collection(Constants.ROOMS)
             .document(roomId)
             .collection(Constants.UPDATED)
-            .whereEqualTo(Constants.DATE, date)
+            .whereEqualTo(Constants.DATE, date).limit(1)
         query.get().addOnSuccessListener {
-            if(it.isEmpty){
+            if (it.isEmpty) {
                 Log.d(TAG, "getUpdatedDaySchedule: EMPTY QUERY")
-            }else{
-                Log.d(TAG, "getUpdatedDaySchedule: EMPTY NOT EMPTY")
+                listener(null)
+            } else {
+                val schedules = it.toObjects(UpdatedDaySchedule::class.java)
+                listener(schedules[0])
             }
         }.addOnFailureListener {
-            Log.d(TAG, "getUpdatedDaySchedule: FAILURE + EXCEPTIO: ${it.message}")
+            Log.d(TAG, "getUpdatedDaySchedule: FAILURE + EXCEPTION: ${it.message}")
+            listener(null)
         }
     }
 
