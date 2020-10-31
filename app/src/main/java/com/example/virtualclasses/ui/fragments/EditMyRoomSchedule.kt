@@ -16,6 +16,7 @@ import com.example.virtualclasses.model.DefaultDaySchedule
 import com.example.virtualclasses.ui.adapter.PerDayScheduleAdapter
 import com.example.virtualclasses.utils.Communicator
 import com.example.virtualclasses.utils.Utility
+import io.grpc.okhttp.internal.Util
 import kotlinx.android.synthetic.main.fragment_edit_my_room_schedule.*
 import kotlinx.android.synthetic.main.fragment_view_subscribed_room_schedule.daySpinner
 import java.util.*
@@ -80,8 +81,12 @@ class EditMyRoomSchedule : Fragment() {
                 // parent.getItemAtPosition(pos)
                 Toast.makeText(context, "position: $pos selected", Toast.LENGTH_SHORT).show()
                 Communicator.dayOfWeekIndex = pos
-                Communicator.date = Utility.getNextWeekDay(
-                    Utility.getCurrentDate(),
+//                Communicator.date = Utility.getNextWeekDay(
+//                    Utility.getCurrentDate(),
+//                    Utility.indexToWeekDay[Communicator.dayOfWeekIndex]!!
+//                )
+                Communicator.date = Utility.getCurrentOrNextWeekDayDate(
+                    Utility.getCurrentCalendar(),
                     Utility.indexToWeekDay[Communicator.dayOfWeekIndex]!!
                 )
                 //check what to show default or updated
@@ -149,8 +154,8 @@ class EditMyRoomSchedule : Fragment() {
                 //update is selected
                 val dayIndex = Communicator.dayOfWeekIndex!!
                 val weekDay = Utility.indexToWeekDay[dayIndex]
-                val now = Utility.getCurrentDate()
-                val date = Utility.getNextWeekDay(now, weekDay!!)
+                val now = Utility.getCurrentCalendar()
+                val date = Utility.getCurrentOrNextWeekDayDate(now, weekDay!!)
                 getUpdatedDaySchedule(date)
             } else {
                 //default is selected

@@ -78,8 +78,18 @@ object Utility {
             date1.get(Calendar.DAY_OF_MONTH)
         )
     }
+    fun getCurrentOrNextWeekDayDate(date: Calendar, day: WeekDay): Date{
+        date.set(Calendar.HOUR_OF_DAY, 0)
+        date.set(Calendar.MINUTE, 0)
+        date.set(Calendar.SECOND, 0)
+        date.set(Calendar.MILLISECOND, 0)
+        while (date[Calendar.DAY_OF_WEEK] != weekDayToCalenderDay[day]){
+            date.add(Calendar.DATE, 1)
+        }
+        return date.time
+    }
 
-    val weekDayToCalenderDay = mapOf(
+    private val weekDayToCalenderDay = mapOf(
         WeekDay.MONDAY to Calendar.MONDAY,
         WeekDay.TUESDAY to Calendar.TUESDAY,
         WeekDay.WEDNESDAY to Calendar.WEDNESDAY,
@@ -92,5 +102,21 @@ object Utility {
     fun getCurrentDate(): Date{
         val date = Date()
         return Date(date.year, date.month, date.date)
+    }
+    fun whatIsTheDate(): Date{
+        val date = Calendar.getInstance()
+        date.set(Calendar.HOUR_OF_DAY, 0)
+        date.set(Calendar.MINUTE, 0)
+        date.set(Calendar.SECOND, 0)
+        date.set(Calendar.MILLISECOND, 0)
+        return date.time
+    }
+    fun getCurrentCalendar(): Calendar {
+        val calendar = Calendar.getInstance()
+        calendar.set(Calendar.HOUR_OF_DAY, 0)
+        calendar.set(Calendar.MINUTE, 0)
+        calendar.set(Calendar.SECOND, 0)
+        calendar.set(Calendar.MILLISECOND, 0)
+        return calendar
     }
 }

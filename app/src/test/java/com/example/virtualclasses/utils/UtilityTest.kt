@@ -21,4 +21,25 @@ class UtilityTest {
         val date = Date()
         println("date: ${date.date} month: ${date.month} year: ${date.year + 1900}")
     }
+
+    @Test
+    fun getCurrentDateUsingCalendar(){
+        val calendar = Calendar.getInstance()
+        calendar.set(Calendar.HOUR_OF_DAY, 0)
+        calendar.set(Calendar.MINUTE, 0)
+        calendar.set(Calendar.SECOND, 0)
+        calendar.set(Calendar.MILLISECOND, 0)
+        calendar.add(Calendar.DATE, 1)
+        println(calendar.time)
+    }
+    @Test
+    fun getNextWeekDate(){
+        val calendar = Calendar.getInstance()
+        println(Utility.getCurrentOrNextWeekDayDate(calendar, WeekDay.WEDNESDAY))
+    }
+    @Test
+    fun getDate(){
+        val date = Utility.whatIsTheDate()
+        println(date)
+    }
 }
