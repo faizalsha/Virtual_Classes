@@ -207,4 +207,25 @@ object FireStore {
                 listener(false)
             }
     }
+
+    fun getUpdatedOrDefaultDaySchedule(
+        date: Date,
+        dayOfWeekIndex: Int,
+        roomId: String,
+        listener: (DaySchedule?) -> Unit
+    ){
+        getUpdatedDaySchedule(date, dayOfWeekIndex, roomId){
+            if(it != null ){
+                listener(it)
+            }else{
+                getDefaultDaySchedule(dayOfWeekIndex, roomId){ defaultDaySchedule ->
+                    if(defaultDaySchedule != null){
+                        listener(defaultDaySchedule)
+                    }else{
+                        listener(null)
+                    }
+                }
+            }
+        }
+    }
 }

@@ -139,6 +139,18 @@ class EditMyRoomSchedule : Fragment() {
             Toast.makeText(context, "updated", Toast.LENGTH_SHORT).show()
         }
     }
+    private fun getUpdatedOrDefaultSchedule(date: Date){
+        FireStore.getUpdatedOrDefaultDaySchedule(date, Communicator.dayOfWeekIndex!!, Communicator.room!!.roomId){
+            isLoading = false
+            if(it == null){
+                Toast.makeText(context, "No Schedule", Toast.LENGTH_LONG).show()
+                return@getUpdatedOrDefaultDaySchedule
+            }
+            Communicator.daySchedule!!.schedules = it.schedules
+            perDayScheduleAdapter.notifyDataSetChanged()
+            Toast.makeText(context, "updatedOrDefault", Toast.LENGTH_SHORT).show()
+        }
+    }
 
     private fun setupFAB() {
         fab.setOnClickListener {
@@ -150,13 +162,16 @@ class EditMyRoomSchedule : Fragment() {
 
     private fun showCorrectSchedule() {
         if (!isLoading) {
+            //clear adapter data
+            Communicator.daySchedule!!.schedules.clear()
             if (Communicator.default_updated == 0) {
                 //update is selected
                 val dayIndex = Communicator.dayOfWeekIndex!!
                 val weekDay = Utility.indexToWeekDay[dayIndex]
                 val now = Utility.getCurrentCalendar()
                 val date = Utility.getCurrentOrNextWeekDayDate(now, weekDay!!)
-                getUpdatedDaySchedule(date)
+//                getUpdatedDaySchedule(date)
+                getUpdatedOrDefaultSchedule(date)
             } else {
                 //default is selected
                 getDefaultDaySchedule()
