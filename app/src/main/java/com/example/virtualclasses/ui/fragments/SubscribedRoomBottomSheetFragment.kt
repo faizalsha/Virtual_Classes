@@ -12,10 +12,10 @@ import com.example.virtualclasses.firebase.FireAuth
 import com.example.virtualclasses.firebase.FireStore
 import com.example.virtualclasses.model.Room
 import com.example.virtualclasses.ui.adapter.RoomsAdapter
+import com.example.virtualclasses.utils.Communicator
+import com.example.virtualclasses.utils.Utility
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
-import kotlinx.android.synthetic.main.fragment_my_room_bottom_sheet.*
 import kotlinx.android.synthetic.main.fragment_subscribed_room_bottom_sheet.*
-import kotlinx.android.synthetic.main.fragment_subscribed_room_bottom_sheet.backButton
 
 class SubscribedRoomBottomSheetFragment : BottomSheetDialogFragment() {
     private lateinit var roomsAdapter: RoomsAdapter
@@ -37,8 +37,13 @@ class SubscribedRoomBottomSheetFragment : BottomSheetDialogFragment() {
     }
 
     private fun setupRecyclerView() {
-        if(context == null) return
-        roomsAdapter = RoomsAdapter(rooms, requireContext()){
+        if (context == null) return
+        roomsAdapter = RoomsAdapter(rooms, requireContext()) {
+            /*sending data to communicator*/
+            Communicator.room = it
+            Communicator.dayOfWeekIndex = Utility.getCurrentDayOfWeekIndex()
+            Communicator.default_updated = 0
+            /*end*/
             val action =
                 HomeFragmentDirections.actionHomeFragmentToViewSubscribedRoomSchedule()
             findNavController().navigate(action)
@@ -50,8 +55,16 @@ class SubscribedRoomBottomSheetFragment : BottomSheetDialogFragment() {
             adapter = roomsAdapter
         }
     }
-    private fun setupListener(){
+
+    private fun setupListener() {
         backButton.setOnClickListener {
+            dismiss()
+        }
+        addButton.setOnClickListener {
+            findNavController()
+                .navigate(
+                    R.id.action_global_subscribeNewRoomFragment
+                )
             dismiss()
         }
     }

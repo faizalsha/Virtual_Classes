@@ -63,4 +63,11 @@
         android:name="com.example.virtualclasses.ui.fragments.ScheduleFormFragment"
         android:label="fragment_schedule_form"
         tools:layout="@layout/fragment_schedule_form" />
+    <fragment
+        android:id="@+id/subscribeNewRoomFragment"
+        android:name="com.example.virtualclasses.ui.fragments.SubscribeNewRoomFragment"
+        android:label="fragment_subscribe_new_room"
+        tools:layout="@layout/fragment_subscribe_new_room">
+
+    </fragment><action android:id="@+id/action_global_subscribeNewRoomFragment" app:destination="@id/subscribeNewRoomFragment"/>
 </navigation>

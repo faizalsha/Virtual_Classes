@@ -228,4 +228,86 @@ object FireStore {
             }
         }
     }
+
+    fun getSubscribedRoomUpdatedOrDefaultDaySchedule(
+        date: Date,
+        dayOfWeekIndex: Int,
+        userId: String,
+        roomId: String,
+        listener: (DaySchedule?) -> Unit
+    ){
+        getSubscribedRoomUpdatedDaySchedule(date, dayOfWeekIndex, userId, roomId){
+            if(it != null ){
+                listener(it)
+            }else{
+                getSubscribedRoomDefaultDaySchedule(dayOfWeekIndex, userId, roomId){ defaultDaySchedule ->
+                    if(defaultDaySchedule != null){
+                        listener(defaultDaySchedule)
+                    }else{
+                        listener(null)
+                    }
+                }
+            }
+        }
+    }
+
+    fun getSubscribedRoomUpdatedDaySchedule(
+        date: Date,
+        dayOfWeekIndex: Int,
+        userId: String,
+        roomId: String,
+        listener: (DaySchedule?) -> Unit
+    ) {
+//        val userId = FireAuth.getCurrentUser()?.uid ?: return
+        if (!Utility.indexToWeekDay.containsKey(dayOfWeekIndex)) return
+        val query = mFireStoreRef
+            .collection(Constants.USERS)
+            .document(userId)
+            .collection(Constants.ROOMS)
+            .document(roomId)
+            .collection(Constants.UPDATED)
+            .whereEqualTo(Constants.DATE, date).limit(1)
+        query.get().addOnSuccessListener {
+            if (it.isEmpty) {
+                Log.d(TAG, "getUpdatedDaySchedule: EMPTY QUERY")
+                listener(null)
+            } else {
+                val schedules = it.toObjects(UpdatedDaySchedule::class.java)
+                listener(schedules[0])
+            }
+        }.addOnFailureListener {
+            Log.d(TAG, "getUpdatedDaySchedule: FAILURE + EXCEPTION: ${it.message}")
+            listener(null)
+        }
+    }
+
+    fun getSubscribedRoomDefaultDaySchedule(dayOfWeekIndex: Int, userId: String, roomId: String, listener: (DefaultDaySchedule?) -> Unit){
+        if(!Utility.indexToWeekDay.containsKey(dayOfWeekIndex)) return
+        val dayOfWeek = Utility.indexToWeekDay[dayOfWeekIndex].toString()
+//        when(dayOfWeekIndex){
+//            0 -> dayOfWeek = WeekDay.MONDAY.toString()
+//            1 -> dayOfWeek = WeekDay.TUESDAY.toString()
+//            2 -> dayOfWeek = WeekDay.WEDNESDAY.toString()
+//            3 -> dayOfWeek = WeekDay.THURSDAY.toString()
+//            4 -> dayOfWeek = WeekDay.FRIDAY.toString()
+//            5 -> dayOfWeek = WeekDay.SATURDAY.toString()
+//            6 -> dayOfWeek = WeekDay.SUNDAY.toString()
+//        }
+        mFireStoreRef.collection(Constants.USERS)
+            .document(userId)
+            .collection(Constants.ROOMS)
+            .document(roomId)
+            .collection(Constants.DEFAULT)
+            .document(dayOfWeek)
+            .get().addOnSuccessListener {
+                try {
+                    val daySchedule = it.toObject(DefaultDaySchedule::class.java)
+                    listener(daySchedule)
+                } catch (e: Exception) {
+                    listener(null)
+                }
+            }.addOnFailureListener {
+                listener(null)
+            }
+    }
 }
