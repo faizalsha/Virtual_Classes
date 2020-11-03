@@ -66,6 +66,7 @@ class ScheduleFormFragment : Fragment() {
                             Communicator.room!!.ownerId,
                             date
                         )
+                    Communicator.isFirebaseLoading = true
                     FireStore.saveUpdatedDaySchedule(
                         updatedDaySchedule,
                         Communicator.room!!.roomId
@@ -78,6 +79,7 @@ class ScheduleFormFragment : Fragment() {
                                 "updatedSchedule couldn't saved successfully",
                                 Toast.LENGTH_LONG
                             ).show()
+                        Communicator.isFirebaseLoading = false
                     }
                 }else{
                     //default schedule selected
@@ -88,6 +90,7 @@ class ScheduleFormFragment : Fragment() {
                             Communicator.room!!.ownerId,
                             Utility.indexToWeekDay[Communicator.dayOfWeekIndex]!!
                         )
+                    Communicator.isFirebaseLoading = true
                     FireStore
                         .saveDefaultDaySchedule(
                             Communicator.dayOfWeekIndex!!,
@@ -98,6 +101,7 @@ class ScheduleFormFragment : Fragment() {
                                 }else{
                                     Toast.makeText(context, "couldn't save successfully", Toast.LENGTH_LONG).show()
                                 }
+                                Communicator.isFirebaseLoading = false
                             }
                 }
                 Toast.makeText(context, "done", Toast.LENGTH_LONG).show()

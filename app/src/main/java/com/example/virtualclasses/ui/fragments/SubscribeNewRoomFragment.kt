@@ -9,6 +9,7 @@ import android.widget.Toast
 import com.example.virtualclasses.R
 import com.example.virtualclasses.firebase.FireStore
 import com.example.virtualclasses.model.RoomInfo
+import com.example.virtualclasses.utils.Communicator
 import kotlinx.android.synthetic.main.fragment_subscribe_new_room.*
 
 class SubscribeNewRoomFragment : Fragment() {
@@ -31,12 +32,15 @@ class SubscribeNewRoomFragment : Fragment() {
             val roomId = roomId.text.toString()
             val roomInfo = RoomInfo("","",ownerId, roomId)
             //todo: first check ownerId != currentUser.uid
+            Communicator.isFirebaseLoading = true
             FireStore.subscribe(roomInfo){
                 if(!it){
                     Toast.makeText(context, "check your credential", Toast.LENGTH_LONG).show()
+                    Communicator.isFirebaseLoading = false
                     return@subscribe
                 }
                 Toast.makeText(context, "subscribed successfully", Toast.LENGTH_SHORT).show()
+                Communicator.isFirebaseLoading = false
             }
         }
     }

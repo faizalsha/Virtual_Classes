@@ -10,6 +10,7 @@ import com.example.virtualclasses.R
 import com.example.virtualclasses.firebase.FireAuth
 import com.example.virtualclasses.firebase.FireStore
 import com.example.virtualclasses.model.RoomDetails
+import com.example.virtualclasses.utils.Communicator
 import kotlinx.android.synthetic.main.fragment_add_room.*
 import java.util.*
 
@@ -40,12 +41,16 @@ class AddRoomFragment : Fragment() {
                 FireAuth.getCurrentUser()!!.email?: "default email",
                 0,
                 Calendar.getInstance().time.toString())
+            Communicator.isFirebaseLoading = true
             FireStore.createRoom(room, FireAuth.getCurrentUser()!!.uid){
                 if(it){
                     Toast.makeText(context, "room created Successfull", Toast.LENGTH_LONG).show()
+                    Communicator.isFirebaseLoading = false
+                    activity?.onBackPressed()
                 }else{
                     Toast.makeText(context, "some error occured", Toast.LENGTH_LONG).show()
                 }
+                Communicator.isFirebaseLoading = false
             }
         }
     }

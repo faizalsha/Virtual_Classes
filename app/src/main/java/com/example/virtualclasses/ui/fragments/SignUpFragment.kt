@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import com.example.virtualclasses.R
 import com.example.virtualclasses.firebase.FireStore
+import com.example.virtualclasses.utils.Communicator
 import kotlinx.android.synthetic.main.fragment_sign_in.*
 import kotlinx.android.synthetic.main.fragment_sign_up.*
 
@@ -36,12 +37,14 @@ class SignUpFragment : Fragment() {
                 Toast.makeText(context, "enter the fields", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }else{
+                Communicator.isFirebaseLoading = true
                 FireStore.addUserToSystem(name, email, password){
                     //TODO: update the ui
                     if(it)
                         Toast.makeText(context, "successfully signed up", Toast.LENGTH_LONG).show()
                     else
                         Toast.makeText(context, "couldn't signed up", Toast.LENGTH_LONG).show()
+                    Communicator.isFirebaseLoading = false
                 }
             }
         }

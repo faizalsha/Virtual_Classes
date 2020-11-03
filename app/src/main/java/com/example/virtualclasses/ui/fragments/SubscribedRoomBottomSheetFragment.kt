@@ -75,10 +75,12 @@ class SubscribedRoomBottomSheetFragment : BottomSheetDialogFragment() {
             setUIVisibility(false)
             return
         }
+        Communicator.isFirebaseLoading = true
         FireStore.getSubscribedRooms(FireAuth.getCurrentUser()!!.uid){
             if(it == null){
                 setUIVisibility(false)
                 Toast.makeText(context, "no updates", Toast.LENGTH_SHORT).show()
+                Communicator.isFirebaseLoading = false
                 return@getSubscribedRooms
             }
             rooms.clear()
@@ -87,6 +89,7 @@ class SubscribedRoomBottomSheetFragment : BottomSheetDialogFragment() {
             }
             roomsAdapter.notifyDataSetChanged()
             setUIVisibility(false)
+            Communicator.isFirebaseLoading = false
         }
     }
 

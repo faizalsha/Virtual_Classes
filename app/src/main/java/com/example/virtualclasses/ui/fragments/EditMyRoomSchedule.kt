@@ -116,39 +116,33 @@ class EditMyRoomSchedule : Fragment() {
     }
 
     private fun getDefaultDaySchedule(){
+        Communicator.isFirebaseLoading = true
         FireStore.getDefaultDaySchedule(Communicator.dayOfWeekIndex!!, Communicator.room!!.roomId){
             isLoading = false
             if(it == null){
                 Toast.makeText(context, "Error occurred", Toast.LENGTH_SHORT).show()
+                Communicator.isFirebaseLoading = false
                 return@getDefaultDaySchedule
             }
             Communicator.daySchedule!!.schedules = it.schedules
             perDayScheduleAdapter.notifyDataSetChanged()
             Toast.makeText(context, "updated", Toast.LENGTH_SHORT).show()
-        }
-    }
-    private fun getUpdatedDaySchedule(date: Date){
-        FireStore.getUpdatedDaySchedule(date, Communicator.dayOfWeekIndex!!, Communicator.room!!.roomId){
-            isLoading = false
-            if(it == null){
-                Toast.makeText(context, "Error occurred", Toast.LENGTH_SHORT).show()
-                return@getUpdatedDaySchedule
-            }
-            Communicator.daySchedule!!.schedules = it.schedules
-            perDayScheduleAdapter.notifyDataSetChanged()
-            Toast.makeText(context, "updated", Toast.LENGTH_SHORT).show()
+            Communicator.isFirebaseLoading = false
         }
     }
     private fun getUpdatedOrDefaultSchedule(date: Date){
+        Communicator.isFirebaseLoading = true
         FireStore.getUpdatedOrDefaultDaySchedule(date, Communicator.dayOfWeekIndex!!, Communicator.room!!.roomId){
             isLoading = false
             if(it == null){
                 Toast.makeText(context, "No Schedule", Toast.LENGTH_LONG).show()
+                Communicator.isFirebaseLoading = false
                 return@getUpdatedOrDefaultDaySchedule
             }
             Communicator.daySchedule!!.schedules = it.schedules
             perDayScheduleAdapter.notifyDataSetChanged()
             Toast.makeText(context, "updatedOrDefault", Toast.LENGTH_SHORT).show()
+            Communicator.isFirebaseLoading = false
         }
     }
 

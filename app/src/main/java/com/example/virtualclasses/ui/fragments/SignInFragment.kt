@@ -10,6 +10,7 @@ import androidx.navigation.fragment.findNavController
 import com.example.virtualclasses.R
 import com.example.virtualclasses.firebase.FireAuth
 import com.example.virtualclasses.firebase.FireStore
+import com.example.virtualclasses.utils.Communicator
 import kotlinx.android.synthetic.main.fragment_sign_in.*
 
 class SignInFragment : Fragment() {
@@ -36,6 +37,7 @@ class SignInFragment : Fragment() {
                 Toast.makeText(context, "Enter Credential", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }else{
+                Communicator.isFirebaseLoading = true
                 FireAuth.loginStudent(email, password){ any: Any, b: Boolean ->
                     if(any is Exception){
                         Toast.makeText(context, "Something went wrong", Toast.LENGTH_SHORT).show()
@@ -44,6 +46,7 @@ class SignInFragment : Fragment() {
                         val action = SignInFragmentDirections.actionSignInFragmentToHomeFragment()
                         findNavController().navigate(action)
                     }
+                    Communicator.isFirebaseLoading = false
                 }
             }
         }

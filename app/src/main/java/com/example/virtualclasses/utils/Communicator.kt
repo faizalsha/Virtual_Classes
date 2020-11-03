@@ -11,4 +11,5 @@ object Communicator: ViewModel() {
     var daySchedule: DaySchedule? = null
     var default_updated: Int? = null
     var date: Date? = null
+    var isFirebaseLoading: Boolean = false
 }

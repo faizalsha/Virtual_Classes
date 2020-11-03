@@ -89,6 +89,7 @@ class ViewSubscribedRoomSchedule : Fragment(), AdapterView.OnItemSelectedListene
     }
 
     private fun getSchedule() {
+        Communicator.isFirebaseLoading = true
         FireStore.getSubscribedRoomUpdatedOrDefaultDaySchedule(
             Communicator.date!!,
             Communicator.dayOfWeekIndex!!,
@@ -101,6 +102,7 @@ class ViewSubscribedRoomSchedule : Fragment(), AdapterView.OnItemSelectedListene
                 Communicator.daySchedule!!.schedules = daySchedule.schedules
                 viewSubscribedRoomScheduleAdapter.notifyDataSetChanged()
             }
+            Communicator.isFirebaseLoading = false
         }
     }
 

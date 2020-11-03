@@ -58,9 +58,11 @@ class MyRoomBottomSheetFragment : BottomSheetDialogFragment() {
             setUIVisibility(false)
             return
         }
+        Communicator.isFirebaseLoading = true
         FireStore.getMyAllRooms(FireAuth.getCurrentUser()!!.uid){
             if(it == null){
                 setUIVisibility(false)
+                Communicator.isFirebaseLoading = false
                 return@getMyAllRooms
             }
             rooms.clear()
@@ -69,6 +71,7 @@ class MyRoomBottomSheetFragment : BottomSheetDialogFragment() {
             }
             roomsRoomAdapter.notifyDataSetChanged()
             setUIVisibility(false)
+            Communicator.isFirebaseLoading = false
         }
     }
     private fun setUIVisibility(makeVisible: Boolean){
