@@ -70,4 +70,9 @@
         tools:layout="@layout/fragment_subscribe_new_room">
 
     </fragment><action android:id="@+id/action_global_subscribeNewRoomFragment" app:destination="@id/subscribeNewRoomFragment"/>
+    <fragment
+        android:id="@+id/addRoomFragment"
+        android:name="com.example.virtualclasses.ui.fragments.AddRoomFragment"
+        android:label="fragment_add_room"
+        tools:layout="@layout/fragment_add_room" /><action android:id="@+id/action_global_addRoomFragment" app:destination="@id/addRoomFragment"/>
 </navigation>
