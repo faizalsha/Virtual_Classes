@@ -17,9 +17,12 @@ import com.example.virtualclasses.utils.Communicator
 import com.example.virtualclasses.utils.Utility
 import kotlinx.android.synthetic.main.fragment_view_subscribed_room_schedule.*
 import java.util.*
+import kotlin.collections.ArrayList
 
 class ViewSubscribedRoomSchedule : Fragment(), AdapterView.OnItemSelectedListener {
     lateinit var viewSubscribedRoomScheduleAdapter: ViewSubscribedRoomScheduleAdapter
+    private lateinit var arraySpinner: ArrayList<String>
+    private lateinit var adapter: ArrayAdapter<String>
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -36,6 +39,7 @@ class ViewSubscribedRoomSchedule : Fragment(), AdapterView.OnItemSelectedListene
             Communicator.room!!.ownerId,
             Utility.indexToWeekDay[Communicator.dayOfWeekIndex]!!
         )
+        arraySpinner = ArrayList<String>(resources.getStringArray(R.array.daysOfWeek).toList())
         setupRecyclerView()
         setSpinner()
     }
@@ -56,8 +60,7 @@ class ViewSubscribedRoomSchedule : Fragment(), AdapterView.OnItemSelectedListene
 
     private fun setSpinner() {
         if (context != null) {
-            val arraySpinner = resources.getStringArray(R.array.daysOfWeek).asList()
-            val adapter = ArrayAdapter<String>(requireContext(), android.R.layout.simple_dropdown_item_1line, arraySpinner)
+            adapter = ArrayAdapter<String>(requireContext(), android.R.layout.simple_dropdown_item_1line, arraySpinner)
             daySpinner.adapter = adapter
         }
         daySpinner.setSelection(Communicator.dayOfWeekIndex!!)
@@ -67,15 +70,26 @@ class ViewSubscribedRoomSchedule : Fragment(), AdapterView.OnItemSelectedListene
     override fun onItemSelected(parent: AdapterView<*>, view: View?, pos: Int, id: Long) {
         // An item was selected. You can retrieve the selected item using
         // parent.getItemAtPosition(pos)
-        Toast.makeText(context, "${parent.getItemAtPosition(pos)} selected", Toast.LENGTH_SHORT)
-            .show()
-        Communicator.dayOfWeekIndex = pos
-        Communicator.date = Utility.getCurrentOrNextWeekDayDate(
-            Utility.getCurrentCalendar(),
-            Utility.indexToWeekDay[Communicator.dayOfWeekIndex]!!
-        )
-        Communicator.daySchedule!!.schedules.clear()
-        getSchedule()
+        if(pos == 7){
+            if(context == null) return
+            Utility.selectDate(requireContext()){
+                arraySpinner[7] = "${it.date}/${it.month}/${it.year}"
+                adapter.notifyDataSetChanged()
+                Communicator.date = it
+                Communicator.dayOfWeekIndex = it.day
+                Communicator.daySchedule!!.schedules.clear()
+                getSchedule()
+            }
+        }else{
+            arraySpinner[7] = "select a date"
+            Communicator.dayOfWeekIndex = pos
+            Communicator.date = Utility.getCurrentOrNextWeekDayDate(
+                Utility.getCurrentCalendar(),
+                Utility.indexToWeekDay[Communicator.dayOfWeekIndex]!!
+            )
+            Communicator.daySchedule!!.schedules.clear()
+            getSchedule()
+        }
     }
 
     override fun onNothingSelected(parent: AdapterView<*>) {

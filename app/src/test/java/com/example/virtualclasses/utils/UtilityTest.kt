@@ -35,7 +35,9 @@ class UtilityTest {
     @Test
     fun getNextWeekDate(){
         val calendar = Calendar.getInstance()
-        println(Utility.getCurrentOrNextWeekDayDate(calendar, WeekDay.WEDNESDAY))
+        println(Utility.getCurrentOrNextWeekDayDate(calendar, WeekDay.SUNDAY))
+        println(calendar.get(Calendar.DAY_OF_WEEK))
+        println(calendar.time.day)
     }
     @Test
     fun getDate(){

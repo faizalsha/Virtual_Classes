@@ -1,5 +1,6 @@
 package com.example.virtualclasses.utils
 
+import android.app.DatePickerDialog
 import android.app.TimePickerDialog
 import android.content.Context
 import com.example.virtualclasses.model.*
@@ -40,20 +41,40 @@ object Utility {
             var min = m
             if (h >= 12) AM_PM = MidDay.PM
             if (h > 12) hour -= 12
-            if(h == 0) hour += 12
+            if (h == 0) hour += 12
             onTimeSelected(ScheduleTime(hour.toString(), min.toString(), AM_PM))
         }
         val timePickerDialog = TimePickerDialog(context, listener, hour, minute, false)
         timePickerDialog.show()
     }
 
+    fun selectDate(context: Context, onDateSelected: (Date) -> Unit) {
+        val myCalendar = Calendar.getInstance()
+        val listener = DatePickerDialog.OnDateSetListener { datePicker, year, month, dayOfMonth ->
+            myCalendar.set(Calendar.YEAR, year)
+            myCalendar.set(Calendar.MONTH, month)
+            myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth)
+            myCalendar.set(Calendar.HOUR_OF_DAY, 0)
+            myCalendar.set(Calendar.MINUTE, 0)
+            myCalendar.set(Calendar.SECOND, 0)
+            myCalendar.set(Calendar.MILLISECOND, 0)
+            onDateSelected(myCalendar.time)
+        }
+        DatePickerDialog(
+            context,
+            listener,
+            myCalendar.get(Calendar.YEAR),
+            myCalendar.get(Calendar.MONTH),
+            myCalendar.get(Calendar.DAY_OF_MONTH)
+        ).show()
+    }
 
 
-    fun validateSchedule(daySchedule: DaySchedule, scheduleToBeInserted: Schedule): Boolean{
+    fun validateSchedule(daySchedule: DaySchedule, scheduleToBeInserted: Schedule): Boolean {
         //start time and end time must be valid
-        if(scheduleToBeInserted.startTime.equals(scheduleToBeInserted.endTime)) return false
+        if (scheduleToBeInserted.startTime.equals(scheduleToBeInserted.endTime)) return false
         val scheduleList = daySchedule.schedules
-        if(scheduleList.size == 0) return true
+        if (scheduleList.size == 0) return true
         scheduleList.sort()
         if (scheduleToBeInserted.endTime.isBeforeOrEqual(scheduleList[0].startTime)) return true
         for (i in 1 until scheduleList.size) {
