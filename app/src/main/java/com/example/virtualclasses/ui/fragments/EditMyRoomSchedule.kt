@@ -49,22 +49,13 @@ class EditMyRoomSchedule : Fragment() {
     }
     private fun setupSpinner(dayOfWeek: Int, defaultOrUpdated: Int) {
         if(context != null) {
-            ArrayAdapter.createFromResource(
-                requireContext(),
-                R.array.daysOfWeek,
-                android.R.layout.simple_spinner_item
-            ).also { adapter ->
-                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-                daySpinner.adapter = adapter
-            }
-            ArrayAdapter.createFromResource(
-                requireContext(),
-                R.array.default_updated,
-                android.R.layout.simple_spinner_item
-            ).also { adapter ->
-                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-                default_updated.adapter = adapter
-            }
+            val arrayDaySpinner = resources.getStringArray(R.array.daysOfWeek).asList()
+            val arrayDayAdapter = ArrayAdapter<String>(requireContext(), android.R.layout.simple_dropdown_item_1line, arrayDaySpinner)
+            daySpinner.adapter = arrayDayAdapter
+
+            val arrayDefaultSpinner = resources.getStringArray(R.array.default_updated).asList()
+            val defaultUpdatedAdapter = ArrayAdapter<String>(requireContext(), android.R.layout.simple_dropdown_item_1line, arrayDefaultSpinner)
+            default_updated.adapter = defaultUpdatedAdapter
         }
         daySpinner.setSelection(dayOfWeek)
         default_updated.setSelection(defaultOrUpdated)

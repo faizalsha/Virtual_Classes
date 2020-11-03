@@ -16,6 +16,7 @@ import com.example.virtualclasses.ui.adapter.ViewSubscribedRoomScheduleAdapter
 import com.example.virtualclasses.utils.Communicator
 import com.example.virtualclasses.utils.Utility
 import kotlinx.android.synthetic.main.fragment_view_subscribed_room_schedule.*
+import java.util.*
 
 class ViewSubscribedRoomSchedule : Fragment(), AdapterView.OnItemSelectedListener {
     lateinit var viewSubscribedRoomScheduleAdapter: ViewSubscribedRoomScheduleAdapter
@@ -55,15 +56,9 @@ class ViewSubscribedRoomSchedule : Fragment(), AdapterView.OnItemSelectedListene
 
     private fun setSpinner() {
         if (context != null) {
-            ArrayAdapter.createFromResource(
-                requireContext(),
-                R.array.daysOfWeek,
-                android.R.layout.simple_spinner_item
-            ).also { adapter ->
-                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-                daySpinner.adapter = adapter
-
-            }
+            val arraySpinner = resources.getStringArray(R.array.daysOfWeek).asList()
+            val adapter = ArrayAdapter<String>(requireContext(), android.R.layout.simple_dropdown_item_1line, arraySpinner)
+            daySpinner.adapter = adapter
         }
         daySpinner.setSelection(Communicator.dayOfWeekIndex!!)
         daySpinner.onItemSelectedListener = this
