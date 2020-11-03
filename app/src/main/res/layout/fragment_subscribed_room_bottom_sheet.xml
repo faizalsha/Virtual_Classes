@@ -55,12 +55,15 @@
         android:layout_centerHorizontal="true"
         android:visibility="visible"/>
 
-    <ImageView
+    <TextView
         android:id="@+id/addButton"
-        android:layout_width="48dp"
+        android:layout_width="match_parent"
         android:layout_height="48dp"
-        android:src="@drawable/ic_add"
-        android:background="@color/lightGreen"
+        android:text="Subscribe to New Room"
+        android:gravity="center"
+        android:textSize="20sp"
+        android:textColor="#fff"
+        android:background="@color/green"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"/>
 
