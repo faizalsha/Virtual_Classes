@@ -5,8 +5,13 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.navigation.fragment.findNavController
 import com.example.virtualclasses.R
+import com.example.virtualclasses.local.Constants
+import com.example.virtualclasses.local.SharedPrefsUtils
+import com.example.virtualclasses.model.Room
+import com.example.virtualclasses.model.RoomInfo
 import kotlinx.android.synthetic.main.fragment_home.*
 
 
@@ -22,6 +27,12 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        try {
+            val room = SharedPrefsUtils.getObject(Constants.HOME_ROOM, context, RoomInfo::class.java)
+            Toast.makeText(context, "${room.roomTitle} selected", Toast.LENGTH_LONG).show()
+        }catch (e: Exception){
+            Toast.makeText(context, "exception: $e", Toast.LENGTH_LONG).show()
+        }
         setupListener()
     }
 
@@ -34,6 +45,9 @@ class HomeFragment : Fragment() {
 //            val action = HomeFragmentDirections.actionHomeFragmentToMyRoomsFragment()
 //            findNavController().navigate(action)
 //        }
+        tvSelectRoom.setOnClickListener {
+            findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToSelectRoomFragment())
+        }
         subscribedRoomsView.setOnClickListener {
             SubscribedRoomBottomSheetFragment().show(parentFragmentManager, "subscribed room bottom sheet")
         }

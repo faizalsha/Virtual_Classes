@@ -79,7 +79,8 @@
             android:layout_below="@id/homeRoomNavigation"
             android:layout_marginTop="16dp"/>
         <TextView
-            android:layout_width="match_parent"
+            android:id="@+id/tvTodaySchedule"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/roomAndTodayScheduleDivider"
             android:text="Today's Schedule"
@@ -88,6 +89,25 @@
             android:textSize="20sp"
             android:layout_marginTop="12dp"
             android:fontFamily="@font/roboto"/>
+
+        <TextView
+            android:id="@+id/tvSelectRoom"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_below="@id/roomAndTodayScheduleDivider"
+            android:layout_marginTop="4dp"
+            android:gravity="end"
+            android:background="@drawable/bg_edit_text"
+            android:padding="12dp"
+            android:textSize="18sp"
+            android:text="Select a room"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tvTodaySchedule"
+            />
 
     </RelativeLayout>
 

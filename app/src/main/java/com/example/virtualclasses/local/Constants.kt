@@ -8,4 +8,5 @@ object Constants{
     const val SUBSCRIBED_ROOM = "subscribedRoom"
     const val SELECT_TIME = "select time"
     const val DATE = "date"
+    const val HOME_ROOM = "home room"
 }
