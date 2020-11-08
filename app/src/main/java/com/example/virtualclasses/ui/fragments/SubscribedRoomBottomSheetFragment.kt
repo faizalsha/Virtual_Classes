@@ -38,7 +38,7 @@ class SubscribedRoomBottomSheetFragment : BottomSheetDialogFragment() {
 
     private fun setupRecyclerView() {
         if (context == null) return
-        roomsAdapter = RoomsAdapter(rooms, requireContext()) {
+        roomsAdapter = RoomsAdapter(rooms, requireContext(), listener = {
             /*sending data to communicator*/
             Communicator.room = it
             Communicator.dayOfWeekIndex = Utility.getCurrentDayOfWeekIndex()
@@ -49,7 +49,11 @@ class SubscribedRoomBottomSheetFragment : BottomSheetDialogFragment() {
             findNavController().navigate(action)
             dismiss()
 
-        }
+        }, detail = {
+            Communicator.room = it
+            findNavController().navigate(R.id.action_global_roomDetail)
+            dismiss()
+        })
         subscribedRoomBottomRecyclerView.apply {
             layoutManager = LinearLayoutManager(context)
             adapter = roomsAdapter

@@ -8,9 +8,12 @@ import android.view.ViewGroup
 import android.widget.Toast
 import com.example.virtualclasses.R
 import com.example.virtualclasses.firebase.FireStore
+import com.example.virtualclasses.model.Room
 import com.example.virtualclasses.model.RoomInfo
 import com.example.virtualclasses.utils.Communicator
+import com.google.gson.Gson
 import kotlinx.android.synthetic.main.fragment_subscribe_new_room.*
+import java.lang.Exception
 
 class SubscribeNewRoomFragment : Fragment() {
 
@@ -28,20 +31,41 @@ class SubscribeNewRoomFragment : Fragment() {
     }
     private fun setupListener(){
         subscribeNewRoomButton.setOnClickListener {
-            val ownerId = roomOwnerId.text.toString()
-            val roomId = roomId.text.toString()
-            val roomInfo = RoomInfo("","",ownerId, roomId)
+            val code = etRoomCode.text.toString().trim()
+            if(code.isEmpty()) return@setOnClickListener
+//            val cred = code.split("/")
+//            if(cred.size != 4){
+//                Toast.makeText(context, "Invalid Code", Toast.LENGTH_SHORT).show()
+//                return@setOnClickListener
+//            }
+//            val roomTitle = cred[0]
+//            val roomDesc = cred[1]
+//            val ownerId = cred[2]
+//            val roomId = cred[3]
+//            val roomInfo = RoomInfo(roomId,roomTitle,roomDesc, ownerId)
+            var roomInfo = RoomInfo()
+            try {
+                roomInfo = Gson().fromJson(code, RoomInfo::class.java)
+            }catch (e: Exception){
+                Toast.makeText(context, e.message, Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
             //todo: first check ownerId != currentUser.uid
             Communicator.isFirebaseLoading = true
-            FireStore.subscribe(roomInfo){
-                if(!it){
+            FireStore.subscribe(roomInfo, listener = {
+                if (!it) {
                     Toast.makeText(context, "check your credential", Toast.LENGTH_LONG).show()
                     Communicator.isFirebaseLoading = false
                     return@subscribe
                 }
                 Toast.makeText(context, "subscribed successfully", Toast.LENGTH_SHORT).show()
                 Communicator.isFirebaseLoading = false
-            }
+            }, alreadySubscribed = {
+                if (it) {
+                    Toast.makeText(context, "already subscribed", Toast.LENGTH_SHORT).show()
+                }
+            })
         }
     }
 }

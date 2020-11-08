@@ -1,6 +1,7 @@
 package com.example.virtualclasses.local
 
 object Constants{
+    const val ROOMID = "roomId"
     const val DEFAULT = "default"
     const val UPDATED = "updated"
     const val USERS = "users"

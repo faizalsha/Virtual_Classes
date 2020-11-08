@@ -9,12 +9,15 @@ import com.example.virtualclasses.R
 import com.example.virtualclasses.model.Room
 import kotlinx.android.synthetic.main.item_room.view.*
 
-class RoomsAdapter(private val data: ArrayList<Room>, val context: Context, private val listener: (Room) -> Unit): RecyclerView.Adapter<RoomsAdapter.MyAdapterViewHolder>() {
+class RoomsAdapter(private val data: ArrayList<Room>, val context: Context, private val listener: (Room) -> Unit, private val detail: (Room) -> Unit): RecyclerView.Adapter<RoomsAdapter.MyAdapterViewHolder>() {
     class MyAdapterViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        fun bind(item: Room, listener: (Room) -> Unit){
+        fun bind(item: Room, listener: (Room) -> Unit, detail: (Room) -> Unit){
             itemView.roomTitle.text = item.roomTitle
             itemView.roomDescription.text = item.roomDescription
             itemView.setOnClickListener { listener(item) }
+            itemView.imageViewRoomInfo.setOnClickListener {
+                detail(item)
+            }
         }
     }
 
@@ -22,7 +25,7 @@ class RoomsAdapter(private val data: ArrayList<Room>, val context: Context, priv
         MyAdapterViewHolder(LayoutInflater.from(context).inflate(R.layout.item_room, parent, false))
 
     override fun onBindViewHolder(holder: MyAdapterViewHolder, position: Int) {
-        holder.bind(data[position], listener)
+        holder.bind(data[position], listener, detail)
     }
 
     override fun getItemCount() = data.size

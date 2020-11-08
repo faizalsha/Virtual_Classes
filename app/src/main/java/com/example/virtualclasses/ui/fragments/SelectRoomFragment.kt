@@ -36,10 +36,12 @@ class SelectRoomFragment : Fragment() {
     }
     private fun setupRecyclerView(){
         if(context == null) return
-        roomsAdapter = RoomsAdapter(rooms, requireContext()){
+        roomsAdapter = RoomsAdapter(rooms, requireContext(), listener = {
             SharedPrefsUtils.saveObject(Constants.HOME_ROOM, it, context)
             activity?.onBackPressed()
-        }
+        }, detail = {
+            Toast.makeText(context, it.roomTitle, Toast.LENGTH_SHORT).show()
+        })
         rvSelectRoomFragment.apply {
             layoutManager = LinearLayoutManager(context)
             adapter = roomsAdapter

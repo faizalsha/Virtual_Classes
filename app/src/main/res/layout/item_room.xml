@@ -8,24 +8,33 @@
     android:padding="16dp"
     android:layout_margin="8dp">
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:gravity="center"
         android:padding="16dp">
 
         <TextView
             android:id="@+id/roomTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
             android:text="room name"/>
         <TextView
             android:id="@+id/roomDescription"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_below="@id/roomTitle"
+            android:layout_centerHorizontal="true"
             android:text="room description"/>
 
-    </LinearLayout>
+        <ImageView
+            android:id="@+id/imageViewRoomInfo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_round_info_24"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true" />
+
+    </RelativeLayout>
 
 </androidx.cardview.widget.CardView>

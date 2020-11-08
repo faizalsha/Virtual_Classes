@@ -66,4 +66,8 @@
         android:name="com.example.virtualclasses.ui.fragments.SelectRoomFragment"
         android:label="fragment_select_room"
         tools:layout="@layout/fragment_select_room" />
+    <fragment
+        android:id="@+id/roomDetail"
+        android:name="com.example.virtualclasses.ui.fragments.RoomDetail"
+        android:label="RoomDetail" /><action android:id="@+id/action_global_roomDetail" app:destination="@id/roomDetail"/>
 </navigation>

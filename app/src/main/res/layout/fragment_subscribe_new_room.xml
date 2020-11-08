@@ -10,15 +10,10 @@
     android:paddingStart="16dp">
 
     <EditText
-        android:id="@+id/roomOwnerId"
+        android:id="@+id/etRoomCode"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="ownerId" />
-    <EditText
-        android:id="@+id/roomId"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="roomId"/>
+        android:hint="room code"/>
 
     <Button
         android:id="@+id/subscribeNewRoomButton"

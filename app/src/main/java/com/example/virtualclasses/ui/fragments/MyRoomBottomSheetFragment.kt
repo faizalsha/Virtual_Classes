@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.virtualclasses.R
@@ -36,7 +37,7 @@ class MyRoomBottomSheetFragment : BottomSheetDialogFragment() {
     }
     private fun setupRecyclerView(){
         if(context == null) return
-        roomsRoomAdapter = RoomsAdapter(rooms, requireContext()){
+        roomsRoomAdapter = RoomsAdapter(rooms, requireContext(), listener = {
             /*sending data to communicator*/
             Communicator.room = it
             Communicator.dayOfWeekIndex = Utility.getCurrentDayOfWeekIndex()
@@ -46,7 +47,11 @@ class MyRoomBottomSheetFragment : BottomSheetDialogFragment() {
                 HomeFragmentDirections.actionHomeFragmentToEditMyRoomSchedule()
             findNavController().navigate(action)
             dismiss()
-        }
+        }, detail = {
+            Communicator.room = it
+            findNavController().navigate(R.id.action_global_roomDetail)
+            dismiss()
+        })
         myRoomBottomRecyclerView.apply {
             layoutManager = LinearLayoutManager(context)
             adapter = roomsRoomAdapter

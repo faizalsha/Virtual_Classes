@@ -70,26 +70,46 @@ object FireStore {
             }
     }
 
-    fun subscribe(roomInfo: RoomInfo, listener: (Boolean) -> Unit) {
+    private fun doesAlreadySubscribed(roomInfo: RoomInfo, result: (Boolean) -> Unit){
+        val userId = FireAuth.getCurrentUser()!!.uid
         mFireStoreRef.collection(Constants.USERS)
-            .document(roomInfo.ownerId)
-            .collection(Constants.ROOMS)
-            .document(roomInfo.roomId)
+            .document(userId)
+            .collection(Constants.SUBSCRIBED_ROOM)
+            .whereEqualTo(Constants.ROOMID, roomInfo.roomId)
             .get().addOnSuccessListener {
-                if(!it.exists()){
-                    listener(false)
-                    return@addOnSuccessListener
-                }
+                result(it.isEmpty)
+            }.addOnFailureListener {
+                result(true)
+            }
+
+    }
+
+    fun subscribe(roomInfo: RoomInfo, listener: (Boolean) -> Unit, alreadySubscribed:(Boolean) -> Unit) {
+        doesAlreadySubscribed(roomInfo){
+            if(!it){
                 mFireStoreRef.collection(Constants.USERS)
-                    .document(FireAuth.getCurrentUser()!!.uid)
-                    .collection(Constants.SUBSCRIBED_ROOM).add(roomInfo).addOnSuccessListener {
-                        listener(true)
+                    .document(roomInfo.ownerId)
+                    .collection(Constants.ROOMS)
+                    .document(roomInfo.roomId)
+                    .get().addOnSuccessListener {
+                        if(!it.exists()){
+                            listener(false)
+                            return@addOnSuccessListener
+                        }
+                        mFireStoreRef.collection(Constants.USERS)
+                            .document(FireAuth.getCurrentUser()!!.uid)
+                            .collection(Constants.SUBSCRIBED_ROOM).add(roomInfo).addOnSuccessListener {
+                                listener(true)
+                            }.addOnFailureListener {
+                                listener(false)
+                            }
                     }.addOnFailureListener {
                         listener(false)
                     }
-            }.addOnFailureListener {
-                listener(false)
+            }else{
+                alreadySubscribed(true)
             }
+        }
     }
 
     fun getSubscribedRooms(userId: String, listener: (MutableList<RoomInfo>?)->Unit){
