@@ -14,8 +14,10 @@ class ScheduleTime(var hour: String, var minute: String, var midday: MidDay) {
     }
     fun isBefore(scheduleTime: ScheduleTime): Boolean{
         if(this.midday == MidDay.AM && scheduleTime.midday == MidDay.PM) return true
-        if(this.hour < scheduleTime.hour) return true
-        if(this.hour == scheduleTime.hour && this.minute < scheduleTime.minute) return true
+        val hour = Integer.parseInt(this.hour) % 12
+        val scheduleHour = Integer.parseInt(scheduleTime.hour)
+        if(hour < scheduleHour) return true
+        if(hour == scheduleHour && this.minute < scheduleTime.minute) return true
         return false
     }
     fun isBeforeOrEqual(scheduleTime: ScheduleTime):Boolean{

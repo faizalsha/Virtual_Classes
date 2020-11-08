@@ -77,9 +77,13 @@ object FireStore {
             .collection(Constants.SUBSCRIBED_ROOM)
             .whereEqualTo(Constants.ROOMID, roomInfo.roomId)
             .get().addOnSuccessListener {
-                result(it.isEmpty)
+                val room = it.toObjects(RoomInfo::class.java)
+                if(room.size >= 1)
+                    result(true)
+                else
+                    result(false)
             }.addOnFailureListener {
-                result(true)
+                result(false)
             }
 
     }
@@ -130,13 +134,13 @@ object FireStore {
     fun saveDefaultDaySchedule(dayOfWeekIndex: Int, defaultDaySchedule: DefaultDaySchedule, roomId: String, listener: (Boolean) -> Unit){
         var dayOfWeek = WeekDay.MONDAY.toString()
         when(dayOfWeekIndex){
-            0 -> dayOfWeek = WeekDay.MONDAY.toString()
-            1 -> dayOfWeek = WeekDay.TUESDAY.toString()
-            2 -> dayOfWeek = WeekDay.WEDNESDAY.toString()
-            3 -> dayOfWeek = WeekDay.THURSDAY.toString()
-            4 -> dayOfWeek = WeekDay.FRIDAY.toString()
-            5 -> dayOfWeek = WeekDay.SATURDAY.toString()
-            6 -> dayOfWeek = WeekDay.SUNDAY.toString()
+            0 -> dayOfWeek = WeekDay.SUNDAY.toString()
+            1 -> dayOfWeek = WeekDay.MONDAY.toString()
+            2 -> dayOfWeek = WeekDay.TUESDAY.toString()
+            3 -> dayOfWeek = WeekDay.WEDNESDAY.toString()
+            4 -> dayOfWeek = WeekDay.THURSDAY.toString()
+            5 -> dayOfWeek = WeekDay.FRIDAY.toString()
+            6 -> dayOfWeek = WeekDay.SATURDAY.toString()
         }
         //todo: if current user is null send user to login screen and clear shared preferences
         val userId = FireAuth.getCurrentUser()!!.uid

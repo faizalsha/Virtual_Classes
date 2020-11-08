@@ -63,6 +63,7 @@ class SubscribeNewRoomFragment : Fragment() {
             }, alreadySubscribed = {
                 if (it) {
                     Toast.makeText(context, "already subscribed", Toast.LENGTH_SHORT).show()
+                    Communicator.isFirebaseLoading = false
                 }
             })
         }
