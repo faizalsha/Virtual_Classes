@@ -22,6 +22,7 @@ object FireAuth{
 
     fun logout(listener: () -> Unit){
         mAuth.signOut()
+        listener()
     }
 
     fun loginStudent(email: String, password: String, listener: (Any, Boolean) -> Unit){

@@ -26,4 +26,10 @@ object SharedPrefsUtils{
         val json: String? = sharedPref.getString(key, "")
         return gson.fromJson(json, returnObject)
     }
+
+    fun clearPrefs(key: String, context: Context){
+        val sharedPrefs = PreferenceManager.getDefaultSharedPreferences(context).edit()
+        sharedPrefs.clear()
+        sharedPrefs.apply()
+    }
 }

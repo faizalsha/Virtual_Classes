@@ -7,6 +7,8 @@ import android.view.Menu
 import android.view.MenuItem
 import com.example.virtualclasses.R
 import com.example.virtualclasses.firebase.FireAuth
+import com.example.virtualclasses.local.Constants
+import com.example.virtualclasses.local.SharedPrefsUtils
 import com.example.virtualclasses.utils.Communicator
 
 class HomePageActivity : AppCompatActivity() {
@@ -28,7 +30,9 @@ class HomePageActivity : AppCompatActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if(item.itemId == R.id.logout){
-            FireAuth.logout(){}
+            FireAuth.logout{
+                SharedPrefsUtils.clearPrefs(Constants.HOME_ROOM, this)
+            }
             startActivity(Intent(this, SigninActivity::class.java))
             finish()
             return true
