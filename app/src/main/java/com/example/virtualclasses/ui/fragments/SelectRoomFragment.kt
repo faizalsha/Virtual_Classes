@@ -40,7 +40,6 @@ class SelectRoomFragment : Fragment() {
             SharedPrefsUtils.saveObject(Constants.HOME_ROOM, it, context)
             activity?.onBackPressed()
         }, detail = {
-            Toast.makeText(context, it.roomTitle, Toast.LENGTH_SHORT).show()
         })
         rvSelectRoomFragment.apply {
             layoutManager = LinearLayoutManager(context)
@@ -55,7 +54,6 @@ class SelectRoomFragment : Fragment() {
                 it.forEach {room ->
                     rooms.add(room)
                 }
-                Toast.makeText(context, "${it.size} room found", Toast.LENGTH_LONG).show()
                 roomsAdapter.notifyDataSetChanged()
             }else{
                 Toast.makeText(context, "no room found", Toast.LENGTH_LONG).show()

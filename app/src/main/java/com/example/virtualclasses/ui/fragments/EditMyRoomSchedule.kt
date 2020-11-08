@@ -97,7 +97,6 @@ class EditMyRoomSchedule : Fragment() {
 
             override fun onNothingSelected(parent: AdapterView<*>) {
                 // Another interface callback
-                Toast.makeText(context, "Nothing selected", Toast.LENGTH_SHORT).show()
             }
 
         }
@@ -105,14 +104,12 @@ class EditMyRoomSchedule : Fragment() {
             override fun onItemSelected(parent: AdapterView<*>, view: View?, pos: Int, id: Long) {
                 // An item was selected. You can retrieve the selected item using
                 // parent.getItemAtPosition(pos)
-                Toast.makeText(context, "position: $pos selected", Toast.LENGTH_SHORT).show()
                 Communicator.default_updated = pos
                 showCorrectSchedule()
             }
 
             override fun onNothingSelected(parent: AdapterView<*>) {
                 // Another interface callback
-                Toast.makeText(context, "Nothing selected", Toast.LENGTH_SHORT).show()
             }
         }
     }
@@ -122,13 +119,11 @@ class EditMyRoomSchedule : Fragment() {
         FireStore.getDefaultDaySchedule(Communicator.dayOfWeekIndex!!, Communicator.room!!.roomId){
             isLoading = false
             if(it == null){
-                Toast.makeText(context, "Error occurred", Toast.LENGTH_SHORT).show()
                 Communicator.isFirebaseLoading = false
                 return@getDefaultDaySchedule
             }
             Communicator.daySchedule!!.schedules = it.schedules
             perDayScheduleAdapter.notifyDataSetChanged()
-            Toast.makeText(context, "updated", Toast.LENGTH_SHORT).show()
             Communicator.isFirebaseLoading = false
         }
     }
@@ -137,13 +132,11 @@ class EditMyRoomSchedule : Fragment() {
         FireStore.getUpdatedOrDefaultDaySchedule(date, Communicator.dayOfWeekIndex!!, Communicator.room!!.roomId){
             isLoading = false
             if(it == null){
-                Toast.makeText(context, "No Schedule", Toast.LENGTH_LONG).show()
                 Communicator.isFirebaseLoading = false
                 return@getUpdatedOrDefaultDaySchedule
             }
             Communicator.daySchedule!!.schedules = it.schedules
             perDayScheduleAdapter.notifyDataSetChanged()
-            Toast.makeText(context, "updatedOrDefault", Toast.LENGTH_SHORT).show()
             Communicator.isFirebaseLoading = false
         }
     }

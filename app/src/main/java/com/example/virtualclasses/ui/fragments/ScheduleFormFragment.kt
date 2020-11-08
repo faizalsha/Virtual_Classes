@@ -107,7 +107,7 @@ class ScheduleFormFragment : Fragment() {
                 Toast.makeText(context, "done", Toast.LENGTH_LONG).show()
 //                activity?.onBackPressed()
             }else{
-                Toast.makeText(context, "conflicting", Toast.LENGTH_LONG).show()
+                Toast.makeText(context, "conflicting Schedule", Toast.LENGTH_LONG).show()
             }
 
         }

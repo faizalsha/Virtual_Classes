@@ -94,7 +94,6 @@ class ViewSubscribedRoomSchedule : Fragment(), AdapterView.OnItemSelectedListene
 
     override fun onNothingSelected(parent: AdapterView<*>) {
         // Another interface callback
-        Toast.makeText(context, "Nothing selected", Toast.LENGTH_SHORT).show()
     }
 
     private fun getSchedule() {

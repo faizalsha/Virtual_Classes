@@ -50,18 +50,15 @@ class HomeFragment : Fragment() {
                 } else {
                     if (context == null) return@getSubscribedRoomUpdatedOrDefaultDaySchedule
                     homeScheduleAdapter = HomeScheduleAdapter(it, requireContext()) {
-                        Toast.makeText(context, "Item clicked", Toast.LENGTH_SHORT).show()
                     }
                     rvHomeFragment.apply {
                         layoutManager = LinearLayoutManager(context)
                         adapter = homeScheduleAdapter
                     }
-                    Toast.makeText(context, "recycler view is set", Toast.LENGTH_SHORT).show()
                 }
                 pbHome.visibility = View.GONE
             }
         } catch (e: Exception) {
-            Toast.makeText(context, "exception: $e", Toast.LENGTH_LONG).show()
             pbHome.visibility = View.GONE
         }
         setupListener()

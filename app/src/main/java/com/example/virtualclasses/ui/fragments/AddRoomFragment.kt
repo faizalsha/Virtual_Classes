@@ -47,11 +47,11 @@ class AddRoomFragment : Fragment() {
             Communicator.isFirebaseLoading = true
             FireStore.createRoom(room, FireAuth.getCurrentUser()!!.uid){
                 if(it){
-                    Toast.makeText(context, "room created Successfull", Toast.LENGTH_LONG).show()
+                    Toast.makeText(context, "room created Successfully", Toast.LENGTH_LONG).show()
                     Communicator.isFirebaseLoading = false
                     activity?.onBackPressed()
                 }else{
-                    Toast.makeText(context, "some error occured", Toast.LENGTH_LONG).show()
+                    Toast.makeText(context, "some error occurred", Toast.LENGTH_LONG).show()
                 }
                 Communicator.isFirebaseLoading = false
 

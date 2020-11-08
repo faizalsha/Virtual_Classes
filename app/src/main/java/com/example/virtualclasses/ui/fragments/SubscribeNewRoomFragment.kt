@@ -47,7 +47,6 @@ class SubscribeNewRoomFragment : Fragment() {
             try {
                 roomInfo = Gson().fromJson(code, RoomInfo::class.java)
             }catch (e: Exception){
-                Toast.makeText(context, e.message, Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
 
