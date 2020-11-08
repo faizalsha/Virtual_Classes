@@ -13,16 +13,23 @@
         android:id="@+id/roomTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:inputType="text"
         android:hint="title"/>
     <EditText
         android:id="@+id/roomDescription"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:inputType="text"
         android:hint="description"/>
     <Button
         android:id="@+id/createRoom"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="create Room now"/>
+    <ProgressBar
+        android:id="@+id/pbCreateRoom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone" />
 
 </LinearLayout>

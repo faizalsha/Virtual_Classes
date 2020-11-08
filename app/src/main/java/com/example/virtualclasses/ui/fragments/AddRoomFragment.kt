@@ -29,17 +29,20 @@ class AddRoomFragment : Fragment() {
     }
     private fun setupListener(){
         createRoom.setOnClickListener {
+
             val title = roomTitle.text.toString().trim()
             val desc = roomDescription.text.toString().trim()
             if(title.isEmpty() || desc.isEmpty()) return@setOnClickListener
             //if current user is null log out and send to login screen
+
+            createRoom.visibility = View.GONE
+            pbCreateRoom.visibility = View.VISIBLE
             val room = RoomDetails("",
                 title,
                 desc,
                 FireAuth.getCurrentUser()!!.uid,
-                FireAuth.getCurrentUser()!!.uid,
                 FireAuth.getCurrentUser()!!.email?: "default email",
-                0,
+                1,
                 Calendar.getInstance().time.toString())
             Communicator.isFirebaseLoading = true
             FireStore.createRoom(room, FireAuth.getCurrentUser()!!.uid){
@@ -51,6 +54,9 @@ class AddRoomFragment : Fragment() {
                     Toast.makeText(context, "some error occured", Toast.LENGTH_LONG).show()
                 }
                 Communicator.isFirebaseLoading = false
+
+                createRoom.visibility = View.VISIBLE
+                pbCreateRoom.visibility = View.GONE
             }
         }
     }

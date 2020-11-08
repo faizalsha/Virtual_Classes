@@ -9,9 +9,8 @@ data class RoomDetails(
     override var roomTitle: String,
     override var roomDescription: String,
     override var ownerId: String,
-    val roomOwnerUserId: String,
     val roomOwnerEmail:String,
     val subscribedUser: Int,
     val createdAt: String) :Room,  Parcelable {
-    constructor():this("", "",  "" ,"", "", "", 0, "")
+    constructor():this("", "",  "" , "", "", 0, "")
 }
