@@ -37,7 +37,7 @@ class HomeFragment : Fragment() {
         try {
             roomInfo =
                 SharedPrefsUtils.getObject(Constants.HOME_ROOM, context, RoomInfo::class.java)
-            Toast.makeText(context, "${roomInfo.roomTitle} selected", Toast.LENGTH_LONG).show()
+            tvSelectRoom.text = roomInfo.roomTitle
             val calendar = Utility.getCurrentCalendar()
             FireStore.getSubscribedRoomUpdatedOrDefaultDaySchedule(
                 calendar.time,
@@ -58,9 +58,11 @@ class HomeFragment : Fragment() {
                     }
                     Toast.makeText(context, "recycler view is set", Toast.LENGTH_SHORT).show()
                 }
+                pbHome.visibility = View.GONE
             }
         } catch (e: Exception) {
             Toast.makeText(context, "exception: $e", Toast.LENGTH_LONG).show()
+            pbHome.visibility = View.GONE
         }
         setupListener()
     }

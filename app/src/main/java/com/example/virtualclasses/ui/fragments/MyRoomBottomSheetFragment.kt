@@ -86,6 +86,7 @@ class MyRoomBottomSheetFragment : BottomSheetDialogFragment() {
         }
         btnCreateRoom.setOnClickListener {
             findNavController().navigate(R.id.action_global_addRoomFragment)
+            dismiss()
         }
     }
 }

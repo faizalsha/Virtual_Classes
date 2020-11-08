@@ -59,6 +59,7 @@ class SelectRoomFragment : Fragment() {
                 Toast.makeText(context, "no room found", Toast.LENGTH_LONG).show()
             }
             Communicator.isFirebaseLoading = false
+            pbSelectRoomFragment.visibility = View.GONE
         }
     }
 }
