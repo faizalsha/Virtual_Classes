@@ -65,4 +65,12 @@
         android:textColor="#fff"
         android:layout_alignParentBottom="true"/>
 
+    <ImageView
+        android:id="@+id/imgNoMyRoom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_face"
+        android:layout_centerInParent="true"
+        android:visibility="gone"/>
+
 </RelativeLayout>

@@ -37,6 +37,20 @@
         android:layout_height="match_parent"
         android:layout_below="@id/spinnerCardView"/>
 
+    <ImageView
+        android:id="@+id/editRoomIllustration"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_face"
+        android:layout_centerInParent="true"
+        android:visibility="gone"/>
+
+    <ProgressBar
+        android:id="@+id/pbEditRoom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"/>
+
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab"
         android:layout_width="wrap_content"

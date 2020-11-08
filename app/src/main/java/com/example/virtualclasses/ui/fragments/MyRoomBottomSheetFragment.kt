@@ -68,6 +68,7 @@ class MyRoomBottomSheetFragment : BottomSheetDialogFragment() {
             if(it == null){
                 setUIVisibility(false)
                 Communicator.isFirebaseLoading = false
+                imgNoMyRoom.visibility = View.VISIBLE
                 return@getMyAllRooms
             }
             rooms.clear()

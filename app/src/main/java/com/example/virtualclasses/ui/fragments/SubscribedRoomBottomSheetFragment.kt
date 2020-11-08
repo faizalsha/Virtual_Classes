@@ -84,6 +84,7 @@ class SubscribedRoomBottomSheetFragment : BottomSheetDialogFragment() {
             if(it == null){
                 setUIVisibility(false)
                 Communicator.isFirebaseLoading = false
+                imgNoSubscribedRoom.visibility = View.VISIBLE
                 return@getSubscribedRooms
             }
             rooms.clear()

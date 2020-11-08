@@ -57,6 +57,7 @@ class SelectRoomFragment : Fragment() {
                 roomsAdapter.notifyDataSetChanged()
             }else{
                 Toast.makeText(context, "no room found", Toast.LENGTH_LONG).show()
+                imgNoRoomFound.visibility = View.VISIBLE
             }
             Communicator.isFirebaseLoading = false
             pbSelectRoomFragment.visibility = View.GONE

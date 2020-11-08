@@ -70,6 +70,7 @@ class ViewSubscribedRoomSchedule : Fragment(), AdapterView.OnItemSelectedListene
     override fun onItemSelected(parent: AdapterView<*>, view: View?, pos: Int, id: Long) {
         // An item was selected. You can retrieve the selected item using
         // parent.getItemAtPosition(pos)
+        pbViewRoom.visibility = View.VISIBLE
         if(pos == 7){
             if(context == null) return
             Utility.selectDate(requireContext()){
@@ -104,6 +105,7 @@ class ViewSubscribedRoomSchedule : Fragment(), AdapterView.OnItemSelectedListene
             Communicator.room!!.ownerId,
             Communicator.room!!.roomId
         ) { daySchedule ->
+            pbViewRoom.visibility = View.GONE
             if (daySchedule == null) {
                 Toast.makeText(context, "No Schedule Found", Toast.LENGTH_LONG).show()
             } else {

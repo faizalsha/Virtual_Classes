@@ -81,6 +81,23 @@
             android:background="@drawable/bg_fab"
             android:layout_alignParentRight="true" />
 
+        <ImageView
+            android:id="@+id/imgHappy"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_happy"
+            android:layout_centerInParent="true"
+            android:visibility="gone"/>
+        <TextView
+            android:id="@+id/tvNoClasses"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="No Classes Today"
+            android:layout_below="@id/imgHappy"
+            android:layout_centerHorizontal="true"
+            android:textSize="20sp"
+            android:visibility="gone"/>
+
     </RelativeLayout>
 
 <!--    <Button-->

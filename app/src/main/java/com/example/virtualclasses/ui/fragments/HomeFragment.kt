@@ -36,6 +36,7 @@ class HomeFragment : Fragment() {
         try {
             roomInfo =
                 SharedPrefsUtils.getObject(Constants.HOME_ROOM, context, RoomInfo::class.java)
+            tvNoClasses.text = "Please select a room first"
             tvSelectRoom.text = roomInfo.roomTitle
             val calendar = Utility.getCurrentCalendar()
             FireStore.getSubscribedRoomUpdatedOrDefaultDaySchedule(
@@ -45,9 +46,13 @@ class HomeFragment : Fragment() {
                 roomInfo.roomId
             ) {
                 if (it == null) {
+                    imgHappy.visibility = View.VISIBLE
+                    tvNoClasses.visibility = View.VISIBLE
                     Toast.makeText(context, "No Schedule found", Toast.LENGTH_LONG).show()
                 } else {
                     if (context == null) return@getSubscribedRoomUpdatedOrDefaultDaySchedule
+                    imgHappy.visibility = View.GONE
+                    tvNoClasses.visibility = View.GONE
                     homeScheduleAdapter = HomeScheduleAdapter(it, requireContext()) {
                     }
                     rvHomeFragment.apply {
@@ -58,6 +63,8 @@ class HomeFragment : Fragment() {
                 pbHome.visibility = View.GONE
             }
         } catch (e: Exception) {
+            imgHappy.visibility = View.VISIBLE
+            tvNoClasses.visibility = View.VISIBLE
             pbHome.visibility = View.GONE
         }
         setupListener()

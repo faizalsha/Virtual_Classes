@@ -73,6 +73,7 @@ class EditMyRoomSchedule : Fragment() {
             override fun onItemSelected(parent: AdapterView<*>, view: View?, pos: Int, id: Long) {
                 // An item was selected. You can retrieve the selected item using
                 // parent.getItemAtPosition(pos)
+                pbEditRoom.visibility = View.VISIBLE
                 if(pos == 7){
                     if(context == null) return
                     Utility.selectDate(requireContext()){
@@ -104,6 +105,7 @@ class EditMyRoomSchedule : Fragment() {
             override fun onItemSelected(parent: AdapterView<*>, view: View?, pos: Int, id: Long) {
                 // An item was selected. You can retrieve the selected item using
                 // parent.getItemAtPosition(pos)
+                pbEditRoom.visibility = View.VISIBLE
                 Communicator.default_updated = pos
                 showCorrectSchedule()
             }
@@ -117,12 +119,24 @@ class EditMyRoomSchedule : Fragment() {
     private fun getDefaultDaySchedule(){
         Communicator.isFirebaseLoading = true
         FireStore.getDefaultDaySchedule(Communicator.dayOfWeekIndex!!, Communicator.room!!.roomId){
+            pbEditRoom.visibility = View.GONE
             isLoading = false
             if(it == null){
                 Communicator.isFirebaseLoading = false
+                scheduleRecyclerview.visibility = View.GONE
+                editRoomIllustration.visibility = View.VISIBLE
                 return@getDefaultDaySchedule
             }
             Communicator.daySchedule!!.schedules = it.schedules
+
+            if(it.schedules.size == 0){
+                scheduleRecyclerview.visibility = View.GONE
+                editRoomIllustration.visibility = View.VISIBLE
+            }else{
+                scheduleRecyclerview.visibility = View.VISIBLE
+                editRoomIllustration.visibility = View.GONE
+            }
+
             perDayScheduleAdapter.notifyDataSetChanged()
             Communicator.isFirebaseLoading = false
         }
@@ -130,12 +144,22 @@ class EditMyRoomSchedule : Fragment() {
     private fun getUpdatedOrDefaultSchedule(date: Date){
         Communicator.isFirebaseLoading = true
         FireStore.getUpdatedOrDefaultDaySchedule(date, Communicator.dayOfWeekIndex!!, Communicator.room!!.roomId){
+            pbEditRoom.visibility = View.GONE
             isLoading = false
             if(it == null){
                 Communicator.isFirebaseLoading = false
+                scheduleRecyclerview.visibility = View.GONE
+                editRoomIllustration.visibility = View.VISIBLE
                 return@getUpdatedOrDefaultDaySchedule
             }
             Communicator.daySchedule!!.schedules = it.schedules
+            if(it.schedules.size == 0){
+                scheduleRecyclerview.visibility = View.GONE
+                editRoomIllustration.visibility = View.VISIBLE
+            }else{
+                scheduleRecyclerview.visibility = View.VISIBLE
+                editRoomIllustration.visibility = View.GONE
+            }
             perDayScheduleAdapter.notifyDataSetChanged()
             Communicator.isFirebaseLoading = false
         }
