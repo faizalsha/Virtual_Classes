@@ -107,9 +107,12 @@ class ViewSubscribedRoomSchedule : Fragment(), AdapterView.OnItemSelectedListene
         ) { daySchedule ->
             pbViewRoom.visibility = View.GONE
             if (daySchedule == null) {
+                imgNoSchedule.visibility = View.VISIBLE
                 Toast.makeText(context, "No Schedule Found", Toast.LENGTH_LONG).show()
             } else {
                 Communicator.daySchedule!!.schedules = daySchedule.schedules
+                if(daySchedule.schedules.size == 0) imgNoSchedule.visibility = View.VISIBLE
+                else imgNoSchedule.visibility = View.GONE
                 viewSubscribedRoomScheduleAdapter.notifyDataSetChanged()
             }
             Communicator.isFirebaseLoading = false

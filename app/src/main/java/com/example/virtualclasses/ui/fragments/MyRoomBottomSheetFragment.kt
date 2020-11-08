@@ -75,6 +75,8 @@ class MyRoomBottomSheetFragment : BottomSheetDialogFragment() {
             it.forEach { roomDetails ->
                 rooms.add(roomDetails)
             }
+            if(it.size == 0) imgNoMyRoom.visibility = View.VISIBLE
+            else imgNoMyRoom.visibility = View.GONE
             roomsRoomAdapter.notifyDataSetChanged()
             setUIVisibility(false)
             Communicator.isFirebaseLoading = false
