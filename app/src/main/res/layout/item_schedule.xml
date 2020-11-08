@@ -11,26 +11,32 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical">
+
         <TextView
             android:id="@+id/startTimeTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/advent_pro_semibold"
+            android:gravity="center_horizontal"
             android:text="10:00AM"
-            android:textSize="20sp"
-            android:gravity="center_horizontal"/>
+            android:textColor="#3251FF"
+            android:textSize="20sp" />
         <TextView
             android:id="@+id/toTextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="to"
             android:gravity="center_horizontal"/>
+
         <TextView
             android:id="@+id/endTimeTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/advent_pro_semibold"
+            android:gravity="center_horizontal"
             android:text="11:00AM"
-            android:textSize="20sp"
-            android:gravity="center_horizontal"/>
+            android:textColor="#27FF31"
+            android:textSize="20sp" />
     </LinearLayout>
 
     <LinearLayout

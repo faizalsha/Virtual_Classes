@@ -100,13 +100,14 @@
             android:gravity="end"
             android:background="@drawable/bg_edit_text"
             android:padding="12dp"
-            android:textSize="18sp"
+            android:textSize="14sp"
             android:text="Select a room"/>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvHomeFragment"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_marginTop="24dp"
             android:layout_below="@id/tvTodaySchedule"
             />
 
