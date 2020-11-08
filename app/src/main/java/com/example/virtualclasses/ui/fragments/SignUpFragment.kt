@@ -48,5 +48,9 @@ class SignUpFragment : Fragment() {
                 }
             }
         }
+
+        tvLogin.setOnClickListener {
+            activity?.onBackPressed()
+        }
     }
 }
