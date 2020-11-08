@@ -5,84 +5,18 @@
     android:layout_height="match_parent"
     tools:context=".ui.fragments.HomeFragment"
     android:orientation="vertical"
-    android:gravity="center">
+    android:gravity="center"
+    android:fillViewport="true">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <LinearLayout
-            android:id="@+id/homeRoomNavigation"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginTop="12dp">
-            <LinearLayout
-                android:id="@+id/subscribedRoomsView"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_weight="1"
-                android:padding="20dp"
-                android:background="@drawable/bg_rooms_home"
-                android:layout_marginLeft="8dp"
-                android:layout_marginRight="8dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:fontFamily="@font/roboto"
-                    android:gravity="center_horizontal"
-                    android:text="Subscribed Rooms"
-                    android:textColor="@color/green"
-                    android:textSize="16sp" />
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="click to view"
-                    android:layout_gravity="center_horizontal"/>
-            </LinearLayout>
-            <LinearLayout
-                android:id="@+id/myRoomsView"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_weight="1"
-                android:padding="20dp"
-                android:layout_marginLeft="8dp"
-                android:layout_marginRight="8dp"
-                android:background="@drawable/bg_rooms_home">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:fontFamily="@font/roboto"
-                    android:text="My Rooms"
-                    android:textColor="@color/green"
-                    android:textSize="16sp" />
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="click to view"
-                    android:layout_gravity="center_horizontal"/>
-            </LinearLayout>
-
-        </LinearLayout>
-
-        <View
-            android:id="@+id/roomAndTodayScheduleDivider"
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="?android:attr/dividerVertical"
-            android:layout_below="@id/homeRoomNavigation"
-            android:layout_marginTop="16dp"/>
         <TextView
             android:id="@+id/tvTodaySchedule"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/roomAndTodayScheduleDivider"
+            android:layout_alignParentTop="true"
             android:text="Today's Schedule"
             android:paddingStart="16dp"
             android:paddingLeft="16dp"
@@ -95,21 +29,23 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
-            android:layout_below="@id/roomAndTodayScheduleDivider"
-            android:layout_marginTop="4dp"
+            android:layout_alignParentTop="true"
+            android:layout_margin="8dp"
+            android:textColor="#000"
             android:gravity="end"
             android:background="@drawable/bg_edit_text"
-            android:padding="12dp"
+            android:padding="8dp"
             android:textSize="14sp"
-            android:text="Select a room"/>
+            android:text="Select a room"
+            android:layout_alignParentRight="true" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvHomeFragment"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="24dp"
-            android:layout_below="@id/tvTodaySchedule"
-            />
+            android:layout_above="@id/myRoomsView"
+            android:layout_below="@id/tvTodaySchedule" />
 
         <ProgressBar
             android:id="@+id/pbHome"
@@ -119,6 +55,31 @@
             android:layout_centerHorizontal="true"
             android:layout_marginTop="24dp"
             android:visibility="visible"/>
+        <Button
+            android:id="@+id/myRoomsView"
+            android:layout_width="160dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentStart="true"
+            android:text="My Rooms"
+            android:elevation="8dp"
+            android:padding="8dp"
+            android:background="@drawable/bg_fab"
+            android:layout_alignParentLeft="true" />
+
+        <Button
+            android:id="@+id/subscribedRoomsView"
+            android:layout_width="160dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentEnd="true"
+            android:text="Subscribed Rooms"
+            android:elevation="8dp"
+            android:padding="8dp"
+            android:background="@drawable/bg_fab"
+            android:layout_alignParentRight="true" />
 
     </RelativeLayout>
 
