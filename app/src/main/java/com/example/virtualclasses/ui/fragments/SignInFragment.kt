@@ -1,5 +1,6 @@
 package com.example.virtualclasses.ui.fragments
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -10,6 +11,8 @@ import androidx.navigation.fragment.findNavController
 import com.example.virtualclasses.R
 import com.example.virtualclasses.firebase.FireAuth
 import com.example.virtualclasses.firebase.FireStore
+import com.example.virtualclasses.ui.HomePageActivity
+import com.example.virtualclasses.ui.SigninActivity
 import com.example.virtualclasses.utils.Communicator
 import kotlinx.android.synthetic.main.fragment_sign_in.*
 
@@ -43,8 +46,9 @@ class SignInFragment : Fragment() {
                         Toast.makeText(context, "Something went wrong", Toast.LENGTH_SHORT).show()
                     }else{
                         Toast.makeText(context, "Successfully logged in", Toast.LENGTH_SHORT).show()
-                        val action = SignInFragmentDirections.actionSignInFragmentToHomeFragment()
-                        findNavController().navigate(action)
+                        val intent = Intent(context, HomePageActivity::class.java)
+                        startActivity(intent)
+                        activity?.finish()
                     }
                     Communicator.isFirebaseLoading = false
                 }

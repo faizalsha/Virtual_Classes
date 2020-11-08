@@ -104,6 +104,7 @@
             android:text="Select a room"/>
 
         <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvHomeFragment"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/tvTodaySchedule"

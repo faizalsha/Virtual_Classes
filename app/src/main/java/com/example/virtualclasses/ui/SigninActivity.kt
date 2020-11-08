@@ -4,13 +4,16 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.example.virtualclasses.R
+import com.example.virtualclasses.firebase.FireAuth
 
-class SplashScreenActivity : AppCompatActivity() {
+class SigninActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        val intent = Intent(this, SignInActivity::class.java)
-        startActivity(intent)
-        finish()
+        if(FireAuth.getCurrentUser() != null){
+            val intent = Intent(this, HomePageActivity::class.java)
+            startActivity(intent)
+            finish()
+        }
     }
 }

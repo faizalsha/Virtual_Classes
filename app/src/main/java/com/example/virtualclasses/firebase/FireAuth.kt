@@ -20,6 +20,10 @@ object FireAuth{
         }
     }
 
+    fun logout(listener: () -> Unit){
+        mAuth.signOut()
+    }
+
     fun loginStudent(email: String, password: String, listener: (Any, Boolean) -> Unit){
         mAuth.signInWithEmailAndPassword(email, password).addOnSuccessListener {
             listener(it, true)
