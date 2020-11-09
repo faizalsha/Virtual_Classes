@@ -3,7 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.fragments.SelectRoomFragment">
+    tools:context=".ui.fragments.SelectRoomFragment"
+    android:background="#3d3d3d">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvSelectRoomFragment"

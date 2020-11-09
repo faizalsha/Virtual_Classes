@@ -58,7 +58,7 @@
         android:id="@+id/btnCreateRoom"
         android:layout_width="match_parent"
         android:layout_height="48dp"
-        android:background="@color/green"
+        android:background="@color/MyTint"
         android:text="Create a new Room"
         android:gravity="center"
         android:textSize="20sp"

@@ -6,25 +6,28 @@
     android:layout_height="wrap_content"
     android:elevation="4dp"
     android:padding="16dp"
-    android:layout_margin="8dp">
+    android:layout_margin="4dp">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="16dp">
+        android:padding="16dp"
+        android:background="@color/MyPrimary">
 
         <TextView
             android:id="@+id/roomTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
+            android:textColor="@color/MyTextPrimary"
+            android:textSize="18sp"
             android:text="room name"/>
         <TextView
             android:id="@+id/roomDescription"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textColor="@color/MyTextPrimary"
             android:layout_below="@id/roomTitle"
-            android:layout_centerHorizontal="true"
+
             android:text="room description"/>
 
         <ImageView

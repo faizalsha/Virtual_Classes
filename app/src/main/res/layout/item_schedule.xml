@@ -10,6 +10,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@color/MyPrimary"
         android:padding="8dp">
 
         <LinearLayout
@@ -25,13 +26,14 @@
                 android:fontFamily="@font/advent_pro_semibold"
                 android:gravity="center_horizontal"
                 android:text="10:00AM"
-                android:textColor="#3251FF"
+                android:textColor="@color/MyTint"
                 android:textSize="20sp" />
             <TextView
                 android:id="@+id/toTextView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="to"
+                android:textColor="@color/MyTextSecondary"
                 android:gravity="center_horizontal"/>
 
             <TextView
@@ -41,7 +43,7 @@
                 android:fontFamily="@font/advent_pro_semibold"
                 android:gravity="center_horizontal"
                 android:text="11:00AM"
-                android:textColor="#27FF31"
+                android:textColor="@color/MyTint"
                 android:textSize="20sp" />
         </LinearLayout>
 
@@ -60,6 +62,7 @@
                 android:layout_height="wrap_content"
                 android:text="Foundation of Computer Science"
                 android:maxLines="1"
+                android:textColor="@color/MyTextPrimary"
                 android:ellipsize="end"
                 android:textSize="20sp" />
 
@@ -71,6 +74,7 @@
                 android:fontFamily="@font/advent_pro_semibold"
                 android:ellipsize="end"
                 android:textSize="16sp"
+                android:textColor="@color/MyTextSecondary"
                 android:text="Rinkaj Goyal Sir"/>
 
         </LinearLayout>
