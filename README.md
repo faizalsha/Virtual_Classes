@@ -16,4 +16,4 @@ Plus you just to need to look at the app in the morning and app will show you th
 Problem Solve :)
 
 # ScreenShots
-<img src="screenshots/ss_1.jpeg" alt="phone image" width="200px" />       <img src="screenshots/ss_2.jpeg" alt="phone image" width="200px" />
+<img src="screenshots/ss_1.jpeg" alt="phone image" width="400px" />       <img src="screenshots/ss_2.jpeg" alt="phone image" width="400px" />
